@@ -2,6 +2,8 @@
 
 #include "WindowEventListener.h"
 
+#include "../Renderer/GraphicDevice.h"
+
 namespace dx9
 {
 	class Window
@@ -16,8 +18,8 @@ namespace dx9
 
 	// Functions:
 
-		static bool GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t width, int32_t height);
-		static bool GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t x, int32_t y, int32_t width, int32_t height);
+		bool GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t width, int32_t height, HWND& hWnd);
+		bool GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t x, int32_t y, int32_t width, int32_t height, HWND& hWnd);
 
 	private:
 

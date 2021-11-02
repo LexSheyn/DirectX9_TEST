@@ -32,6 +32,6 @@ namespace dx9
 
 	// Variables:
 
-		IDirect3D9* m_Direct3D;
+		IDirect3D9* m_Direct3d;
 	};
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GraphicDevice.h"
+
 namespace dx9
 {
 	class Renderer
@@ -14,6 +16,16 @@ namespace dx9
 
 	// Functions:
 
-		//
+		void Render();
+
+	// Accessors:
+
+		GraphicDevice* getDevice() const;
+
+	private:
+
+	// Variables:
+
+		GraphicDevice* m_Device;
 	};
 }

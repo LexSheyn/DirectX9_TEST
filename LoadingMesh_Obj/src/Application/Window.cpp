@@ -13,17 +13,15 @@ namespace dx9
 	{
 	}
 
-	bool Window::GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t width, int32_t height)
+	bool Window::GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t width, int32_t height, HWND& hWnd)
 	{			
 		return GenerateWindow(hInstance, nCmdShow, className, windowTitle, 
 			                  (GetSystemMetrics(SM_CXSCREEN) - width) / 2,
-			                  (GetSystemMetrics(SM_CYSCREEN) - height) / 2, width, height);
+			                  (GetSystemMetrics(SM_CYSCREEN) - height) / 2, width, height, hWnd);
 	}
 
-	bool Window::GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t x, int32_t y, int32_t width, int32_t height)
+	bool Window::GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t x, int32_t y, int32_t width, int32_t height, HWND& hWnd)
 	{
-		HWND hWnd;
-
 		WNDCLASSEXA wcex;
 
 		ZeroMemory(&wcex, sizeof(WNDCLASSEX));
