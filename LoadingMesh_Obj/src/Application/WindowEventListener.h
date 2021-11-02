@@ -6,13 +6,13 @@ namespace dx9
 	{
 	public:
 
-		// Constuctors and Destructors:
+	// Constuctors and Destructors:
 
 		WindowEventListener();
 
 		~WindowEventListener();
 
-		// Functions:
+	// Functions:
 
 		static LRESULT __stdcall WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	};

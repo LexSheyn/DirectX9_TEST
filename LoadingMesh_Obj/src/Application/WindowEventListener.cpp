@@ -20,12 +20,19 @@ namespace dx9
 	{
 		switch (message)
 		{
+			case WM_CLOSE:
+			{
+				DestroyWindow(hWnd);
+
+				return 0;
+			}
+
 			case WM_DESTROY:
 			{
 				PostQuitMessage(0);
 
 				return 0;
-			} break;
+			}
 		}
 
 		return DefWindowProcA(hWnd, message, wParam, lParam);

@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\Renderer\GraphicDevice.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\EntryPoint\Main.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="src\Updater\Updater.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Application\Application.h" />
     <ClInclude Include="src\Renderer\GraphicDevice.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\PrecompiledHeaders\stdafx.h" />

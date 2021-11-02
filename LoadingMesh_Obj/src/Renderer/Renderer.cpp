@@ -12,6 +12,7 @@ namespace dx9
 	
 	Renderer::~Renderer()
 	{
+		delete m_Device;
 	}
 	
 

@@ -18,8 +18,8 @@ namespace dx9
 
 	// Functions:
 
-		bool GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t width, int32_t height, HWND& hWnd);
-		bool GenerateWindow(HINSTANCE hInstance, int32_t nCmdShow, LPCSTR className, LPCSTR windowTitle, int32_t x, int32_t y, int32_t width, int32_t height, HWND& hWnd);
+		bool GenerateWindow(HINSTANCE hInstance, int32 nCmdShow, LPCSTR className, LPCSTR windowTitle, int32 width, int32 height, HWND& hWnd);
+		bool GenerateWindow(HINSTANCE hInstance, int32 nCmdShow, LPCSTR className, LPCSTR windowTitle, int32 x, int32 y, int32 width, int32 height, HWND& hWnd);
 
 	private:
 
