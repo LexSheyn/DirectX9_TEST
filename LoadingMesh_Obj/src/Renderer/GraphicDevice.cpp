@@ -100,6 +100,7 @@ namespace dx9
 	
 	bool GraphicDevice::CreateVertexBuffer()
 	{
+		// TEST mesh
 		Vertex verts[3] =
 		{
 			Vertex(0.0f,  0.0f, 0.0f, Color::Green),
@@ -107,6 +108,7 @@ namespace dx9
 			Vertex(-1.0f, -1.0f, 0.0f, Color::Red)
 		};
 
+		// Create vertex buffer.
 		m_Device->CreateVertexBuffer(3 * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VB, NULL);
 
 		void* pVerts;

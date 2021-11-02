@@ -172,6 +172,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application\Application.cpp" />
+    <ClCompile Include="src\Mesh\Color.cpp" />
+    <ClCompile Include="src\Mesh\Vertex.cpp" />
     <ClCompile Include="src\Renderer\GraphicDevice.cpp" />
     <ClCompile Include="src\Renderer\Renderer.cpp" />
     <ClCompile Include="src\EntryPoint\Main.cpp" />
@@ -191,11 +193,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\Application.h" />
+    <ClInclude Include="src\Mesh\Color.h" />
     <ClInclude Include="src\Renderer\GraphicDevice.h" />
     <ClInclude Include="src\Renderer\Renderer.h" />
     <ClInclude Include="src\PrecompiledHeaders\stdafx.h" />
     <ClInclude Include="src\Application\Window.h" />
     <ClInclude Include="src\Application\WindowEventListener.h" />
+    <ClInclude Include="src\Mesh\Vertex.h" />
     <ClInclude Include="src\Updater\Updater.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
