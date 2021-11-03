@@ -18,8 +18,13 @@ typedef unsigned long long uint64;
 
 // C++ core
 #include <iostream>
-#include <string>
+#include <sstream>
+#include <vector>
 
 // DirectX 9
 #include <d3d9.h>
 #include <d3dx9.h>
+
+#pragma comment(lib, "d3d9.lib" )
+#pragma comment(lib, "d3dx9.lib")
+#pragma comment(lib, "dxerr.lib")

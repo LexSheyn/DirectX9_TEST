@@ -1,7 +1,6 @@
 #pragma once
 
-// TEST
-#include "../Mesh/Vertex.h"
+#include "../Mesh/2D/TriangleShape.h"
 
 namespace dx9
 {
@@ -19,8 +18,7 @@ namespace dx9
 
 		bool Initialize(HWND hWnd, int32 width, int32 height, bool windowed);
 
-		// TEST
-		bool CreateVertexBuffer();
+		bool CreateVertexBuffer(int32 width, int32 height, TriangleShape shape);
 		
 		void Clear(D3DCOLOR color);
 
@@ -29,6 +27,10 @@ namespace dx9
 		void End();
 
 		void Present();
+
+	// Accessors:
+
+		IDirect3DDevice9* GetDirect3DDevice();
 
 	private:
 

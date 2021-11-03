@@ -98,22 +98,16 @@ namespace dx9
 		return true;
 	}
 	
-	bool GraphicDevice::CreateVertexBuffer()
+	bool GraphicDevice::CreateVertexBuffer(int32 width, int32 height, TriangleShape shape)
 	{
-		// TEST mesh
-		Vertex verts[3] =
-		{
-			Vertex(0.0f,  0.0f, 0.0f, Color::Green),
-			Vertex(1.0f,  0.0f, 0.0f, Color::Blue),
-			Vertex(-1.0f, -1.0f, 0.0f, Color::Red)
-		};
-
-		// Create vertex buffer.
-		m_Device->CreateVertexBuffer(3 * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VB, NULL);
+		m_Device->CreateVertexBuffer(shape.VertexNumber * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VB, NULL);
 
 		void* pVerts;
-		m_VB->Lock(0, sizeof(verts), (void**)&pVerts, 0);
-		std::memcpy(pVerts, &verts, sizeof(verts));
+
+		m_VB->Lock(0, sizeof(shape.Vertexes), (void**)&pVerts, 0);
+
+		std::memcpy(pVerts, &shape.Vertexes, sizeof(shape.Vertexes));
+
 		m_VB->Unlock();
 
 		return true;
@@ -121,13 +115,18 @@ namespace dx9
 
 	void GraphicDevice::Clear(D3DCOLOR color)
 	{
-		// 2nd parameter is set to 'NULL' so that it clears  the entire back buffer.
+		// 2nd parameter is set to 'nullptr' so that it clears the entire back buffer.
 		m_Device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, color, 1.0f, 0);
 	}
 	
 	void GraphicDevice::Begin()
 	{
 		m_Device->BeginScene();
+		m_Device->SetStreamSource(0, m_VB, 0, sizeof(Vertex));
+		m_Device->SetFVF(Vertex::FVF);
+
+		// Test triangle.
+		m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
 	}
 	
 	void GraphicDevice::End()
@@ -139,5 +138,13 @@ namespace dx9
 	{
 		// Present scene to the window.
 		m_Device->Present(NULL, NULL, NULL, NULL);
+	}
+
+
+// Accessors:
+
+	IDirect3DDevice9* GraphicDevice::GetDirect3DDevice()
+	{
+		return m_Device;
 	}
 }

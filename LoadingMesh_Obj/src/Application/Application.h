@@ -37,5 +37,9 @@ namespace dx9
 		Updater     m_Updater;
 				    
 		Renderer    m_Renderer;
+
+	// TEST
+
+		TriangleShape m_Triangle;
 	};
 }

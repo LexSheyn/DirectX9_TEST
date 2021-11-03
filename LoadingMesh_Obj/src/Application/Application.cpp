@@ -32,15 +32,14 @@ namespace dx9
 
 	bool Application::Initialize(HINSTANCE hInstance, int32 nCmdShow)
 	{
-		if (!m_Window.GenerateWindow(hInstance, nCmdShow, "Win32Window", "D3DX9 Win32 Window", m_Width, m_Height, m_hWnd))
-		{
-			return false;
-		}
+		// 1. Create Window.
+		m_Window.GenerateWindow(hInstance, nCmdShow, "Win32Window", "D3DX9 Win32 Window", m_Width, m_Height, m_hWnd);
 
-		if (!m_Renderer.getDevice()->Initialize(m_hWnd, m_Width, m_Height, true))
-		{
-			return false;
-		}
+		// 2. Initialize Renderer.
+		m_Renderer.Initialize(m_hWnd, m_Width, m_Height, true);
+
+		// 3. Create vertex buffer for specific shape.
+		m_Renderer.GetGraphicDevice().CreateVertexBuffer(m_Width, m_Height, m_Triangle);
 
 		return true;
 	}
