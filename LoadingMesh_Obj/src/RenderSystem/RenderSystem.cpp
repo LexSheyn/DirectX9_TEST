@@ -1,24 +1,24 @@
 #include "../PrecompiledHeaders/stdafx.h"
-#include "Renderer.h"
+#include "RenderSystem.h"
 
 namespace dx9
 {
 // Constructors and Destructor:
 
-	Renderer::Renderer()
+	RenderSystem::RenderSystem()
 	{
 		m_ScreenWidth  = 0;
 		m_ScreenHeight = 0;
 	}
 	
-	Renderer::~Renderer()
+	RenderSystem::~RenderSystem()
 	{
 	}
 	
 
 // Functions:
 
-	void Renderer::Initialize(HWND hWnd, int32 width, int32 height, bool windowed)
+	void RenderSystem::Initialize(HWND hWnd, int32 width, int32 height, bool windowed)
 	{
 		m_GraphicDevice.Initialize(hWnd, width, height, windowed);
 
@@ -37,7 +37,7 @@ namespace dx9
 		m_Camera.SetPosition(position, target, up);
 	}
 
-	void Renderer::Render()
+	void RenderSystem::Render()
 	{
 		m_GraphicDevice.Clear(Color::Black);
 
@@ -51,12 +51,12 @@ namespace dx9
 
 // Accessors:
 
-	GraphicDevice& Renderer::GetGraphicDevice()
+	GraphicDevice& RenderSystem::GetGraphicDevice()
 	{
 		return m_GraphicDevice;
 	}
 	
-	Camera& Renderer::GetCamera()
+	Camera& RenderSystem::GetCamera()
 	{
 		return m_Camera;
 	}

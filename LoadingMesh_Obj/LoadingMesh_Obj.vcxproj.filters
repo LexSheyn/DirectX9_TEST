@@ -27,10 +27,10 @@
     <ClCompile Include="src\Application\WindowEventListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\Renderer.cpp">
+    <ClCompile Include="src\RenderSystem\RenderSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\GraphicDevice.cpp">
+    <ClCompile Include="src\RenderSystem\GraphicDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Updater\Updater.cpp">
@@ -45,7 +45,7 @@
     <ClCompile Include="src\Mesh\Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer\Camera.cpp">
+    <ClCompile Include="src\RenderSystem\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Mesh\2D\Transformable.cpp">
@@ -68,10 +68,10 @@
     <ClInclude Include="src\Application\WindowEventListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\Renderer.h">
+    <ClInclude Include="src\RenderSystem\RenderSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\GraphicDevice.h">
+    <ClInclude Include="src\RenderSystem\GraphicDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Updater\Updater.h">
@@ -86,7 +86,7 @@
     <ClInclude Include="src\Mesh\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderer\Camera.h">
+    <ClInclude Include="src\RenderSystem\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Mesh\2D\Transformable.h">

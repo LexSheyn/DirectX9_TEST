@@ -7,15 +7,15 @@
 
 namespace dx9
 {
-	class Renderer
+	class RenderSystem
 	{
 	public:
 
 	// Constructors and Destructor:
 
-		Renderer();
+		RenderSystem();
 
-		~Renderer();
+		~RenderSystem();
 
 	// Functions:
 

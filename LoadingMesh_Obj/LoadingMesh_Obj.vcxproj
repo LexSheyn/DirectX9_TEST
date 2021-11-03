@@ -183,12 +183,12 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Renderer\Camera.cpp" />
+    <ClCompile Include="src\RenderSystem\Camera.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\Mesh\Color.cpp" />
     <ClCompile Include="src\Mesh\Vertex.cpp" />
-    <ClCompile Include="src\Renderer\GraphicDevice.cpp" />
-    <ClCompile Include="src\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\RenderSystem\GraphicDevice.cpp" />
+    <ClCompile Include="src\RenderSystem\RenderSystem.cpp" />
     <ClCompile Include="src\EntryPoint\Main.cpp" />
     <ClCompile Include="src\PrecompiledHeaders\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -213,11 +213,11 @@
   <ItemGroup>
     <ClInclude Include="src\Mesh\2D\Shape.h" />
     <ClInclude Include="src\Mesh\2D\TriangleShape.h" />
-    <ClInclude Include="src\Renderer\Camera.h" />
+    <ClInclude Include="src\RenderSystem\Camera.h" />
     <ClInclude Include="src\Application\Application.h" />
     <ClInclude Include="src\Mesh\Color.h" />
-    <ClInclude Include="src\Renderer\GraphicDevice.h" />
-    <ClInclude Include="src\Renderer\Renderer.h" />
+    <ClInclude Include="src\RenderSystem\GraphicDevice.h" />
+    <ClInclude Include="src\RenderSystem\RenderSystem.h" />
     <ClInclude Include="src\PrecompiledHeaders\stdafx.h" />
     <ClInclude Include="src\Application\Window.h" />
     <ClInclude Include="src\Application\WindowEventListener.h" />

@@ -3,43 +3,39 @@
 #include "Window.h"
 
 #include "../Updater/Updater.h"
-#include "../Renderer/Renderer.h"
+#include "../RenderSystem/RenderSystem.h"
 
-namespace dx9
+class Application
 {
-	class Application
-	{
-	public:
+public:
 
-	// Constructors and Destructor:
+// Constructors and Destructor:
 
-		Application();
+	Application();
 
-		virtual ~Application();
+	virtual ~Application();
 
-	// Functions:
+// Functions:
 
-		bool Initialize(HINSTANCE hInstance, int32 nCmdShow);
+	bool Initialize(HINSTANCE hInstance, int32 nCmdShow);
 
-		int32 Run();
+	int32 Run();
 
-	protected:
+protected:
 
-	// Attributes:
+// Attributes:
 
-		HWND        m_hWnd;
-		LPCSTR      m_Title;
-		int32       m_Width;
-		int32       m_Height;
+	HWND   m_hWnd;
+	LPCSTR m_Title;
+	int32  m_Width;
+	int32  m_Height;
 
-		Window      m_Window;
+	dx9::Window  m_Window;
 
-		Updater     m_Updater;
-				    
-		Renderer    m_Renderer;
+	dx9::Updater m_Updater;
+			    
+	dx9::RenderSystem m_RenderSystem;
 
-	// TEST
-
-		TriangleShape m_Triangle;
-	};
-}
+// TEST
+	dx9::TriangleShape m_Triangle;
+};
