@@ -13,5 +13,9 @@ namespace dx9
 		Transformable() {};
 
 		virtual ~Transformable() {};
+
+	protected:
+
+		//
 	};
 }

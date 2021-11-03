@@ -98,15 +98,15 @@ namespace dx9
 		return true;
 	}
 	
-	bool GraphicDevice::CreateVertexBuffer(int32 width, int32 height, TriangleShape shape)
+	bool GraphicDevice::CreateVertexBuffer(int32 width, int32 height, Shape shape)
 	{
-		m_Device->CreateVertexBuffer(shape.VertexNumber * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VB, NULL);
+		m_Device->CreateVertexBuffer(shape.VertecesNumber * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VB, NULL);
 
 		void* pVerts;
 
-		m_VB->Lock(0, sizeof(shape.Vertexes), (void**)&pVerts, 0);
+		m_VB->Lock(0, sizeof(shape.Verteces), (void**)&pVerts, 0);
 
-		std::memcpy(pVerts, &shape.Vertexes, sizeof(shape.Vertexes));
+		std::memcpy(pVerts, &shape.Verteces, sizeof(shape.Verteces));
 
 		m_VB->Unlock();
 

@@ -2,7 +2,7 @@
 
 #include "WindowEventListener.h"
 
-#include "../Renderer/GraphicDevice.h"
+#include "../RenderSystem/GraphicDevice.h"
 
 namespace dx9
 {

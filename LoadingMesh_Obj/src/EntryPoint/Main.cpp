@@ -4,7 +4,7 @@
 
 int32 __stdcall WinMain( _In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR pCmdLine, _In_ int32 nCmdShow)
 {
-	dx9::Application application;
+	Application application;
 
 	application.Initialize(hInstance, nCmdShow);
 

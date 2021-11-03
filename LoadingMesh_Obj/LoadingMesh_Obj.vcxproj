@@ -171,22 +171,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Mesh\2D\Shape.cpp">
+    <ClCompile Include="src\RenderObject\2D\RectangleShape.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Mesh\2D\TriangleShape.cpp">
+    <ClCompile Include="src\RenderObject\2D\Shape.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\RenderObject\2D\TriangleShape.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\RenderObject\Index.cpp" />
     <ClCompile Include="src\RenderSystem\Camera.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
-    <ClCompile Include="src\Mesh\Color.cpp" />
-    <ClCompile Include="src\Mesh\Vertex.cpp" />
+    <ClCompile Include="src\RenderObject\Color.cpp" />
+    <ClCompile Include="src\RenderObject\Vertex.cpp" />
     <ClCompile Include="src\RenderSystem\GraphicDevice.cpp" />
     <ClCompile Include="src\RenderSystem\RenderSystem.cpp" />
     <ClCompile Include="src\EntryPoint\Main.cpp" />
@@ -203,7 +210,7 @@
     <ClCompile Include="src\Application\Window.cpp" />
     <ClCompile Include="src\Application\WindowEventListener.cpp" />
     <ClCompile Include="src\Updater\Updater.cpp" />
-    <ClCompile Include="src\Mesh\2D\Transformable.cpp">
+    <ClCompile Include="src\RenderObject\2D\Transformable.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
@@ -211,19 +218,21 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Mesh\2D\Shape.h" />
-    <ClInclude Include="src\Mesh\2D\TriangleShape.h" />
+    <ClInclude Include="src\RenderObject\2D\RectangleShape.h" />
+    <ClInclude Include="src\RenderObject\2D\Shape.h" />
+    <ClInclude Include="src\RenderObject\2D\TriangleShape.h" />
+    <ClInclude Include="src\RenderObject\Index.h" />
     <ClInclude Include="src\RenderSystem\Camera.h" />
     <ClInclude Include="src\Application\Application.h" />
-    <ClInclude Include="src\Mesh\Color.h" />
+    <ClInclude Include="src\RenderObject\Color.h" />
     <ClInclude Include="src\RenderSystem\GraphicDevice.h" />
     <ClInclude Include="src\RenderSystem\RenderSystem.h" />
     <ClInclude Include="src\PrecompiledHeaders\stdafx.h" />
     <ClInclude Include="src\Application\Window.h" />
     <ClInclude Include="src\Application\WindowEventListener.h" />
-    <ClInclude Include="src\Mesh\Vertex.h" />
+    <ClInclude Include="src\RenderObject\Vertex.h" />
     <ClInclude Include="src\Updater\Updater.h" />
-    <ClInclude Include="src\Mesh\2D\Transformable.h" />
+    <ClInclude Include="src\RenderObject\2D\Transformable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -22,14 +22,10 @@ namespace dx9
 
 		//
 
-	// Public Variables:
+	// Temporary Public Variables:
 
-		static const uint32 VertexNumber = 3;
+		static const uint32 VertecesNumber = 3;
 
-//	private:
-
-	// Variables:
-
-		Vertex Vertexes[VertexNumber];
+		Vertex Verteces[VertecesNumber];
 	};
 }

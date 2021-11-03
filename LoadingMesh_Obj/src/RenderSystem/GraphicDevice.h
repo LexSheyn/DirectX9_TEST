@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../Mesh/2D/TriangleShape.h"
+#include "../RenderObject/2D/TriangleShape.h"
+#include "../RenderObject/2D/RectangleShape.h"
 
 namespace dx9
 {
@@ -18,6 +19,7 @@ namespace dx9
 
 		bool Initialize(HWND hWnd, int32 width, int32 height, bool windowed);
 
+		// REPLACE TriangleShape by Shape, AND ALSO REWORK Shape AND HERITOR CLASSES
 		bool CreateVertexBuffer(int32 width, int32 height, TriangleShape shape);
 		
 		void Clear(D3DCOLOR color);

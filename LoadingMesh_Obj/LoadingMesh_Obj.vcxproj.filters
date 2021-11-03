@@ -39,22 +39,28 @@
     <ClCompile Include="src\Application\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh\Vertex.cpp">
+    <ClCompile Include="src\RenderObject\Vertex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh\Color.cpp">
+    <ClCompile Include="src\RenderObject\Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\RenderSystem\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh\2D\Transformable.cpp">
+    <ClCompile Include="src\RenderObject\2D\Transformable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh\2D\Shape.cpp">
+    <ClCompile Include="src\RenderObject\2D\Shape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Mesh\2D\TriangleShape.cpp">
+    <ClCompile Include="src\RenderObject\2D\TriangleShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderObject\2D\RectangleShape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderObject\Index.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,22 +86,28 @@
     <ClInclude Include="src\Application\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh\Vertex.h">
+    <ClInclude Include="src\RenderObject\Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh\Color.h">
+    <ClInclude Include="src\RenderObject\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RenderSystem\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh\2D\Transformable.h">
+    <ClInclude Include="src\RenderObject\2D\Transformable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh\2D\Shape.h">
+    <ClInclude Include="src\RenderObject\2D\Shape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Mesh\2D\TriangleShape.h">
+    <ClInclude Include="src\RenderObject\2D\TriangleShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderObject\2D\RectangleShape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderObject\Index.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
