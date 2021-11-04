@@ -98,7 +98,7 @@ namespace dx9
 		return true;
 	}
 	
-	bool GraphicDevice::CreateVertexBuffer(int32 width, int32 height, Shape shape)
+	bool GraphicDevice::CreateVertexBuffer(int32 width, int32 height, TriangleShape shape)
 	{
 		m_Device->CreateVertexBuffer(shape.VertecesNumber * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VB, NULL);
 
