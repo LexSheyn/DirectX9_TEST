@@ -189,7 +189,6 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\RenderObject\Index.cpp" />
     <ClCompile Include="src\RenderSystem\Camera.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\RenderObject\Color.cpp" />
@@ -221,7 +220,6 @@
     <ClInclude Include="src\RenderObject\2D\RectangleShape.h" />
     <ClInclude Include="src\RenderObject\2D\Shape.h" />
     <ClInclude Include="src\RenderObject\2D\TriangleShape.h" />
-    <ClInclude Include="src\RenderObject\Index.h" />
     <ClInclude Include="src\RenderSystem\Camera.h" />
     <ClInclude Include="src\Application\Application.h" />
     <ClInclude Include="src\RenderObject\Color.h" />

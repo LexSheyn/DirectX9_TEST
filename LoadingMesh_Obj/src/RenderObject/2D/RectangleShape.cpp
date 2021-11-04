@@ -7,13 +7,18 @@ namespace dx9
 
 	RectangleShape::RectangleShape()
 	{
-		Vertexes[0] = Vertex( -1.0f,  1.0f, 0.0f, Color::Red    );
-		Vertexes[1] = Vertex(  1.0f, -1.0f, 0.0f, Color::Orange );
-		Vertexes[2] = Vertex( -1.0f, -1.0f, 0.0f, Color::Yellow );
-		Vertexes[3] = Vertex(  1.0f, -1.0f, 0.0f, Color::Green  );
+		Vertices[0] = Vertex( -1.0f,  1.0f, 0.0f, Color::Red    );
+		Vertices[1] = Vertex(  1.0f,  1.0f, 0.0f, Color::Orange );
+		Vertices[2] = Vertex( -1.0f, -1.0f, 0.0f, Color::Yellow );
+		Vertices[3] = Vertex(  1.0f, -1.0f, 0.0f, Color::Green  );
 	}
 	
 	RectangleShape::~RectangleShape()
 	{
 	}
+	
+
+// Accessors:
+
+	//
 }

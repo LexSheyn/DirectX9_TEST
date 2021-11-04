@@ -9,17 +9,19 @@ namespace dx9
 	{
 		// Device.
 		m_Device   = nullptr;
-
 		m_Direct3d = nullptr;
 
 		m_d3dpp    = { 0 };
-
 		m_Viewport = { 0 };
 
 		// Vertexes.
-		m_VB = nullptr;
+		m_VertexBuffer = nullptr;
+		m_IndexBuffer  = nullptr;
 
-		m_IB = nullptr;
+		// TEST
+		m_VerticesCount   = 0;
+		m_IndicesCount    = 0;
+		m_PrimitivesCount = 0;
 	}
 	
 	GraphicDevice::~GraphicDevice()
@@ -98,17 +100,37 @@ namespace dx9
 		return true;
 	}
 	
-	bool GraphicDevice::CreateVertexBuffer(int32 width, int32 height, TriangleShape shape)
+	bool GraphicDevice::CreateVertexBuffer(RectangleShape* shape)
 	{
-		m_Device->CreateVertexBuffer(shape.VertecesNumber * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VB, NULL);
+		m_VerticesCount   = shape->VerticesNumber;
 
-		void* pVerts;
+		void* pVertices;
 
-		m_VB->Lock(0, sizeof(shape.Verteces), (void**)&pVerts, 0);
+		m_Device->CreateVertexBuffer(shape->VerticesNumber * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
 
-		std::memcpy(pVerts, &shape.Verteces, sizeof(shape.Verteces));
+		m_VertexBuffer->Lock(0, sizeof(shape->Vertices), (void**)&pVertices, 0);
 
-		m_VB->Unlock();
+		std::memcpy(pVertices, &shape->Vertices, sizeof(shape->Vertices));
+
+		m_VertexBuffer->Unlock();
+
+		return true;
+	}
+
+	bool GraphicDevice::CreateIndexBuffer(RectangleShape* shape)
+	{
+		m_IndicesCount    = shape->IndicesNumber;
+		m_PrimitivesCount = m_IndicesCount / 3;
+
+		void* pIndices;
+
+		m_Device->CreateIndexBuffer(shape->IndicesNumber * sizeof(int32), D3DUSAGE_WRITEONLY, D3DFMT_INDEX32, D3DPOOL_MANAGED, &m_IndexBuffer, nullptr);
+
+		m_IndexBuffer->Lock(0, sizeof(shape->Indices), (void**)&pIndices, 0);
+
+		std::memcpy(pIndices, &shape->Indices, sizeof(shape->Indices));
+
+		m_IndexBuffer->Unlock();
 
 		return true;
 	}
@@ -122,11 +144,15 @@ namespace dx9
 	void GraphicDevice::Begin()
 	{
 		m_Device->BeginScene();
-		m_Device->SetStreamSource(0, m_VB, 0, sizeof(Vertex));
+		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(Vertex));
+		m_Device->SetIndices(m_IndexBuffer);
 		m_Device->SetFVF(Vertex::FVF);
 
-		// Test triangle.
-		m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
+		// TEST rectangle.
+		if (m_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_IndicesCount, 0, m_PrimitivesCount) == D3D_OK)
+		{
+			
+		}
 	}
 	
 	void GraphicDevice::End()
@@ -137,7 +163,7 @@ namespace dx9
 	void GraphicDevice::Present()
 	{
 		// Present scene to the window.
-		m_Device->Present(NULL, NULL, NULL, NULL);
+		m_Device->Present(nullptr, nullptr, nullptr, nullptr);
 	}
 
 

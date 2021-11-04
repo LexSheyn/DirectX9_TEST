@@ -20,7 +20,9 @@ namespace dx9
 		bool Initialize(HWND hWnd, int32 width, int32 height, bool windowed);
 
 		// REPLACE TriangleShape by Shape, AND ALSO REWORK Shape AND HERITOR CLASSES
-		bool CreateVertexBuffer(int32 width, int32 height, TriangleShape shape);
+		bool CreateVertexBuffer(RectangleShape* shape);
+
+		bool CreateIndexBuffer(RectangleShape* shape);
 		
 		void Clear(D3DCOLOR color);
 
@@ -45,9 +47,16 @@ namespace dx9
 		D3DPRESENT_PARAMETERS m_d3dpp;
 
 		D3DVIEWPORT9          m_Viewport;
+				
+	// Buffers:
+
+		IDirect3DVertexBuffer9* m_VertexBuffer;
+
+		IDirect3DIndexBuffer9*  m_IndexBuffer;
 
 		// TEST
-		IDirect3DVertexBuffer9* m_VB;
-		IDirect3DIndexBuffer9*  m_IB;
+		uint32 m_VerticesCount;
+		uint32 m_IndicesCount;
+		uint32 m_PrimitivesCount;
 	};
 }

@@ -37,5 +37,6 @@ protected:
 	dx9::RenderSystem m_RenderSystem;
 
 // TEST
-	dx9::TriangleShape m_Triangle;
+//	dx9::TriangleShape m_Triangle;
+	dx9::RectangleShape m_Rectangle;
 };

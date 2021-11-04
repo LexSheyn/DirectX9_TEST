@@ -7,9 +7,9 @@ namespace dx9
 
 	TriangleShape::TriangleShape()
 	{
-		Verteces[0] = Vertex(  0.0f,  1.0f, 0.0f, Color::Red   );
-		Verteces[1] = Vertex(  1.0f, -1.0f, 0.0f, Color::Green );
-		Verteces[2] = Vertex( -1.0f, -1.0f, 0.0f, Color::Blue  );
+		Vertices[0] = Vertex(  0.0f,  1.0f, 0.0f, Color::Red   );
+		Vertices[1] = Vertex(  1.0f, -1.0f, 0.0f, Color::Green );
+		Vertices[2] = Vertex( -1.0f, -1.0f, 0.0f, Color::Blue  );
 	}
 	
 	TriangleShape::~TriangleShape()

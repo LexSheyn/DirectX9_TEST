@@ -37,7 +37,10 @@ bool Application::Initialize(HINSTANCE hInstance, int32 nCmdShow)
 	m_RenderSystem.Initialize(m_hWnd, m_Width, m_Height, true);
 
 	// 3. Create vertex buffer for specific shape.
-	m_RenderSystem.GetGraphicDevice().CreateVertexBuffer(m_Width, m_Height, m_Triangle);
+	m_RenderSystem.GetGraphicDevice().CreateVertexBuffer(&m_Rectangle);
+	
+	// 4. Create index buffer for specific shape.
+	m_RenderSystem.GetGraphicDevice().CreateIndexBuffer(&m_Rectangle);
 
 	return true;
 }

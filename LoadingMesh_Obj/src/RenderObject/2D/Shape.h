@@ -13,5 +13,13 @@ namespace dx9
 		Shape() {};
 
 		virtual ~Shape() {};
+
+	// Functions:
+
+		//
+
+	// Accessors:
+
+		//
 	};
 }

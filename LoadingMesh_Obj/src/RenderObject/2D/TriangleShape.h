@@ -24,8 +24,16 @@ namespace dx9
 
 	// Temporary Public Variables:
 
-		static const uint32 VertecesNumber = 3;
+		static const uint32 VerticesNumber = 3;
 
-		Vertex Verteces[VertecesNumber];
+		Vertex Vertices[VerticesNumber];
+
+		static const uint32 IndicesNumber = 3;
+
+		// Possibly should be 'const'
+		int32 Indices[IndicesNumber] =
+		{
+			0, 1, 2
+		};
 	};
 }
