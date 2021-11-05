@@ -22,6 +22,11 @@ namespace dx9
 		m_VerticesCount   = 0;
 		m_IndicesCount    = 0;
 		m_PrimitivesCount = 0;
+
+		// TEST
+		x = 0.0f;
+		y = 0.0f;
+		z = 0.0f;
 	}
 	
 	GraphicDevice::~GraphicDevice()
@@ -100,77 +105,102 @@ namespace dx9
 		return true;
 	}
 	
-	bool GraphicDevice::CreateVertexBuffer(RectangleShape* shape)
+	bool GraphicDevice::CreateVertexBuffer(SCube* cube)
 	{
-		m_VerticesCount   = shape->VerticesNumber;
+		m_VerticesCount   = cube->VerticesNumber;
 
 		void* pVertices;
 
-		m_Device->CreateVertexBuffer(shape->VerticesNumber * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
+		m_Device->CreateVertexBuffer(cube->VerticesNumber * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
 
-		m_VertexBuffer->Lock(0, sizeof(shape->Vertices), (void**)&pVertices, 0);
+		m_VertexBuffer->Lock(0, sizeof(cube->Vertices), (void**)&pVertices, 0);
 
-		std::memcpy(pVertices, &shape->Vertices, sizeof(shape->Vertices));
+		std::memcpy(pVertices, &cube->Vertices, sizeof(cube->Vertices));
 
 		m_VertexBuffer->Unlock();
 
 		return true;
 	}
 
-	bool GraphicDevice::CreateIndexBuffer(RectangleShape* shape)
+	bool GraphicDevice::CreateIndexBuffer(SCube* cube)
 	{
-		m_IndicesCount    = shape->IndicesNumber;
+		m_IndicesCount    = cube->IndicesNumber;
 		m_PrimitivesCount = m_IndicesCount / 3;
 
 		void* pIndices;
 
-		m_Device->CreateIndexBuffer(shape->IndicesNumber * sizeof(int32), D3DUSAGE_WRITEONLY, D3DFMT_INDEX32, D3DPOOL_MANAGED, &m_IndexBuffer, nullptr);
+		m_Device->CreateIndexBuffer(cube->IndicesNumber * sizeof(int32), D3DUSAGE_WRITEONLY, D3DFMT_INDEX32, D3DPOOL_MANAGED, &m_IndexBuffer, nullptr);
 
-		m_IndexBuffer->Lock(0, sizeof(shape->Indices), (void**)&pIndices, 0);
+		m_IndexBuffer->Lock(0, sizeof(cube->Indices), (void**)&pIndices, 0);
 
-		std::memcpy(pIndices, &shape->Indices, sizeof(shape->Indices));
+		std::memcpy(pIndices, &cube->Indices, sizeof(cube->Indices));
 
 		m_IndexBuffer->Unlock();
 
 		return true;
 	}
-
-	void GraphicDevice::Clear(D3DCOLOR color)
+	
+	void GraphicDevice::ClearBeginEndPresent(D3DCOLOR color)
 	{
+		// Clear scene with certain color.
 		// 2nd parameter is set to 'nullptr' so that it clears the entire back buffer.
 		m_Device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, color, 1.0f, 0);
-	}
-	
-	void GraphicDevice::Begin()
-	{
+
+		// Begin scene.
 		m_Device->BeginScene();
+
+		// TEST
+		x += 0.010f;
+		y += 0.010f;
+		z += 0.005f;
+		D3DXMatrixRotationX(&m_RotationMatrix_X, x);
+		D3DXMatrixRotationY(&m_RotationMatrix_Y, y);
+		D3DXMatrixRotationZ(&m_RotationMatrix_Z, z);
+		m_SceneMatrix = m_RotationMatrix_X * m_RotationMatrix_Y * m_RotationMatrix_Z;
+		m_Device->SetTransform(D3DTS_WORLD, &m_SceneMatrix);
+
+
+
+
 		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(Vertex));
 		m_Device->SetIndices(m_IndexBuffer);
 		m_Device->SetFVF(Vertex::FVF);
 
 		// TEST rectangle.
-		if (m_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_IndicesCount, 0, m_PrimitivesCount) == D3D_OK)
-		{
-			
-		}
-	}
-	
-	void GraphicDevice::End()
-	{
+		m_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_IndicesCount, 0, m_PrimitivesCount);
+
+		// End scene.
 		m_Device->EndScene();
-	}
-	
-	void GraphicDevice::Present()
-	{
+
 		// Present scene to the window.
 		m_Device->Present(nullptr, nullptr, nullptr, nullptr);
 	}
-
+	
 
 // Accessors:
 
 	IDirect3DDevice9* GraphicDevice::GetDirect3DDevice()
 	{
 		return m_Device;
+	}
+	
+	D3DXMATRIX* GraphicDevice::GetSceneMatrix()
+	{
+		return &m_SceneMatrix;
+	}
+	
+	D3DXMATRIX* GraphicDevice::GetRotationMatrix_X()
+	{
+		return &m_RotationMatrix_X;
+	}
+	
+	D3DXMATRIX* GraphicDevice::GetRotationMatrix_Y()
+	{
+		return &m_RotationMatrix_Y;
+	}
+	
+	D3DXMATRIX* GraphicDevice::GetRotationMatrix_Z()
+	{
+		return &m_RotationMatrix_Z;
 	}
 }

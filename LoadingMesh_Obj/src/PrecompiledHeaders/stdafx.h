@@ -20,6 +20,8 @@ typedef unsigned long long uint64;
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <thread>
+#include <chrono>
 
 // DirectX 9
 #include <d3d9.h>

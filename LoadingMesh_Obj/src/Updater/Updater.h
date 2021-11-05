@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../RenderSystem/RenderSystem.h"
+
 namespace dx9
 {
 	class Updater
@@ -14,6 +16,15 @@ namespace dx9
 
 	// Functions:
 
+		void SetRenderSystem(RenderSystem* renderSystem);
+
 		void Update(const float& dt);
+
+	private:
+
+	// Variables:
+
+		// TEST
+		RenderSystem* m_RenderSystemPtr;
 	};
 }

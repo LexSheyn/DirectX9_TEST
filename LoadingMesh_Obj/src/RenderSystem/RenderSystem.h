@@ -1,9 +1,6 @@
 #pragma once
 
-#include "GraphicDevice.h"
 #include "Camera.h"
-
-
 
 namespace dx9
 {

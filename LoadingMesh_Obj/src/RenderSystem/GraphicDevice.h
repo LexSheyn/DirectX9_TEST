@@ -2,6 +2,7 @@
 
 #include "../RenderObject/2D/TriangleShape.h"
 #include "../RenderObject/2D/RectangleShape.h"
+#include "../RenderObject/3D/SCube.h"
 
 namespace dx9
 {
@@ -20,21 +21,23 @@ namespace dx9
 		bool Initialize(HWND hWnd, int32 width, int32 height, bool windowed);
 
 		// REPLACE TriangleShape by Shape, AND ALSO REWORK Shape AND HERITOR CLASSES
-		bool CreateVertexBuffer(RectangleShape* shape);
+		bool CreateVertexBuffer(SCube* cube);
 
-		bool CreateIndexBuffer(RectangleShape* shape);
+		bool CreateIndexBuffer(SCube* cube);
 		
-		void Clear(D3DCOLOR color);
-
-		void Begin();
-
-		void End();
-
-		void Present();
+		void ClearBeginEndPresent(D3DCOLOR color);
 
 	// Accessors:
 
 		IDirect3DDevice9* GetDirect3DDevice();
+
+		D3DXMATRIX* GetSceneMatrix();
+
+		D3DXMATRIX* GetRotationMatrix_X();
+
+		D3DXMATRIX* GetRotationMatrix_Y();
+
+		D3DXMATRIX* GetRotationMatrix_Z();
 
 	private:
 
@@ -47,6 +50,13 @@ namespace dx9
 		D3DPRESENT_PARAMETERS m_d3dpp;
 
 		D3DVIEWPORT9          m_Viewport;
+
+	// Scene:
+
+		D3DXMATRIX m_SceneMatrix;
+		D3DXMATRIX m_RotationMatrix_X;
+		D3DXMATRIX m_RotationMatrix_Y;
+		D3DXMATRIX m_RotationMatrix_Z;
 				
 	// Buffers:
 
@@ -58,5 +68,9 @@ namespace dx9
 		uint32 m_VerticesCount;
 		uint32 m_IndicesCount;
 		uint32 m_PrimitivesCount;
+
+		float x;
+		float y;
+		float z;
 	};
 }

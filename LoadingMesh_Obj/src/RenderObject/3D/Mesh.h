@@ -1,8 +1,10 @@
 #pragma once
 
+#include "../Transformable.h"
+
 namespace dx9
 {
-	class Mesh
+	class Mesh : public Transformable
 	{
 	public:
 

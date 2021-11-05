@@ -17,6 +17,15 @@ namespace dx9
 		m_AspectRatio = 16.0f / 9.0f;
 
 		m_DevicePtr = nullptr;
+
+		// Rotation
+		m_SceneMatrixPtr      = nullptr;
+		m_RotationMatrixPtr_X = nullptr;
+		m_RotationMatrixPtr_Y = nullptr;
+		m_RotationMatrixPtr_Z = nullptr;
+		m_RotationAngle_X     = 0.0f;
+		m_RotationAngle_Y     = 0.0f;
+		m_RotationAngle_Z     = 0.0f;
 	}
 	
 	Camera::~Camera()
@@ -25,8 +34,42 @@ namespace dx9
 
 
 // Functions:
+	
+	void Camera::Update(const float& dt)
+	{
+		// X Y Z rotations.
+	//	D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X * dt);
+	//	D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y * dt);
+	//	D3DXMatrixRotationZ(m_RotationMatrixPtr_Z, m_RotationAngle_Z * dt);
 
-	//
+		// Final SceneMatrix rotation.
+	//	*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y) * (*m_RotationMatrixPtr_Z);
+	//	*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y);
+	}
+	
+	void Camera::Rotate_X(float offsetAngle_X)
+	{
+		m_RotationAngle_X += offsetAngle_X;
+
+		D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X);
+
+		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y);
+	}
+
+	void Camera::Rotate_Y(float offsetAngle_Y)
+	{
+		m_RotationAngle_Y += offsetAngle_Y;
+
+		D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y);
+
+		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y);
+	}
+
+	void Camera::Rotate_Z(float offsetAngle_Z)
+	{
+		m_RotationAngle_Z += offsetAngle_Z;
+	}
+
 
 // Accessors:
 
@@ -37,6 +80,14 @@ namespace dx9
 	void Camera::SetDevice(IDirect3DDevice9* device)
 	{
 		m_DevicePtr = device;
+	}
+
+	void Camera::SetMatrices(D3DXMATRIX* sceneMatrix, D3DXMATRIX* rotationMatrix_X, D3DXMATRIX* rotationMatrix_Y, D3DXMATRIX* rotationMatrix_Z)
+	{
+		m_SceneMatrixPtr      = sceneMatrix;
+		m_RotationMatrixPtr_X = rotationMatrix_X;
+		m_RotationMatrixPtr_Y = rotationMatrix_Y;
+		m_RotationMatrixPtr_Z = rotationMatrix_Z;
 	}
 
 	void Camera::SetFovY(float fovY)
@@ -60,5 +111,20 @@ namespace dx9
 		m_DevicePtr->SetTransform(D3DTS_PROJECTION, &m_ProjectionMatrix);
 		m_DevicePtr->SetRenderState(D3DRS_LIGHTING, false);
 		m_DevicePtr->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
+	}
+	
+	void Camera::SetRotation_X(float angle_X)
+	{
+		m_RotationAngle_X = angle_X;
+	}
+	
+	void Camera::SetRotation_Y(float angle_Y)
+	{
+		m_RotationAngle_Y = angle_Y;
+	}
+	
+	void Camera::SetRotation_Z(float angle_Z)
+	{
+		m_RotationAngle_Z = angle_Z;
 	}
 }

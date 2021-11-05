@@ -7,6 +7,7 @@ namespace dx9
 
 	Updater::Updater()
 	{
+		m_RenderSystemPtr = nullptr;
 	}
 	
 	Updater::~Updater()
@@ -16,8 +17,13 @@ namespace dx9
 
 // Functions:
 
+	void Updater::SetRenderSystem(RenderSystem* renderSystem)
+	{
+		m_RenderSystemPtr = renderSystem;
+	}
+
 	void Updater::Update(const float& dt)
 	{
-		// Do stuff...
+		m_RenderSystemPtr->GetCamera().Update(dt);
 	}
 }

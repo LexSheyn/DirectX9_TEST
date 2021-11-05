@@ -27,25 +27,20 @@ namespace dx9
 
 		// Setup camera.
 		m_Camera.SetDevice(m_GraphicDevice.GetDirect3DDevice());
+		m_Camera.SetMatrices(m_GraphicDevice.GetSceneMatrix(), m_GraphicDevice.GetRotationMatrix_X(), m_GraphicDevice.GetRotationMatrix_Y(), m_GraphicDevice.GetRotationMatrix_Z());
 		m_Camera.SetAspectRatio(static_cast<float>(width) / static_cast<float>(height));
 
 		// TEST position.
 		D3DXVECTOR3 position = D3DXVECTOR3( 0.0f, 0.0f, -5.0f );
 		D3DXVECTOR3 target   = D3DXVECTOR3( 0.0f, 0.0f,  1.0f );
 		D3DXVECTOR3 up       = D3DXVECTOR3( 0.0f, 1.0f,  0.0f );
-
+	
 		m_Camera.SetPosition(position, target, up);
 	}
 
 	void RenderSystem::Render()
 	{
-		m_GraphicDevice.Clear(Color::Black);
-
-		m_GraphicDevice.Begin();
-
-		m_GraphicDevice.End();
-
-		m_GraphicDevice.Present();
+		m_GraphicDevice.ClearBeginEndPresent(Color::Black);
 	}
 
 
