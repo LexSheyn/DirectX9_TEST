@@ -31,3 +31,6 @@ typedef unsigned long long uint64;
 #pragma comment(lib, "d3d9.lib" )
 #pragma comment(lib, "d3dx9.lib")
 #pragma comment(lib, "dxerr.lib")
+
+// Custom
+#include "../Templates/Templates.h"

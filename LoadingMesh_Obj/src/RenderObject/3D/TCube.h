@@ -23,9 +23,18 @@ namespace dx9
 
 	// Accessors:
 
-		//
+		const std::string& GetTexturePath() const;
 
 	// Modifiers:
+		
+		void SetPosition(D3DXVECTOR3 position);
+		void SetPosition(float x, float y, float z);
+
+		void SetRotation(D3DXVECTOR3 rotation);
+		void SetRotation(float x, float y, float z);
+
+		void SetScale(D3DXVECTOR3 scale);
+		void SetScale(float x, float y, float z);
 
 		void SetTexture(const char* filePath);
 
@@ -64,6 +73,17 @@ namespace dx9
 			2, 3, 6,
 			6, 3, 7
 		};
+
+	private:
+
+	// Variables:
+
+		D3DXVECTOR3 m_Position;
+		D3DXVECTOR3 m_Rotation;
+		D3DXVECTOR3 m_Scale;
+
+		IDirect3DTexture9* m_Texture;
+		std::string m_TexturePath;
 	};
 }
 #endif // TCUBE_H

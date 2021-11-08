@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Templates.h"
-
 #include "../RenderObject/2D/TriangleShape.h"
 #include "../RenderObject/2D/RectangleShape.h"
 #include "../RenderObject/3D/SCube.h"

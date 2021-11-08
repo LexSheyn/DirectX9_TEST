@@ -66,7 +66,7 @@
     <ClCompile Include="src\RenderObject\3D\SCube.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\RenderSystem\Templates.cpp">
+    <ClCompile Include="src\Templates\Templates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\RenderObject\3D\TCube.cpp">
@@ -125,7 +125,7 @@
     <ClInclude Include="src\RenderObject\3D\SCube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\RenderSystem\Templates.h">
+    <ClInclude Include="src\Templates\Templates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RenderObject\3D\TCube.h">

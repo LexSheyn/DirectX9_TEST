@@ -223,7 +223,7 @@
     </ClCompile>
     <ClCompile Include="src\Application\Window.cpp" />
     <ClCompile Include="src\Application\WindowEventListener.cpp" />
-    <ClCompile Include="src\RenderSystem\Templates.cpp" />
+    <ClCompile Include="src\Templates\Templates.cpp" />
     <ClCompile Include="src\Updater\Updater.cpp" />
     <ClCompile Include="src\RenderObject\Transformable.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
@@ -254,7 +254,7 @@
     <ClInclude Include="src\Application\Window.h" />
     <ClInclude Include="src\Application\WindowEventListener.h" />
     <ClInclude Include="src\RenderObject\SVertex.h" />
-    <ClInclude Include="src\RenderSystem\Templates.h" />
+    <ClInclude Include="src\Templates\Templates.h" />
     <ClInclude Include="src\Updater\Updater.h" />
     <ClInclude Include="src\RenderObject\Transformable.h" />
     <ClInclude Include="src\RenderObject\3D\TCube.h" />
