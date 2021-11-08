@@ -11,7 +11,8 @@ namespace dx9
 	// Constructors:
 		
 		TVertex();
-		TVertex(float _x, float _y, float _z, float _u, float _v, D3DCOLOR _color);
+		TVertex(float _x, float _y, float _z, float _u, float _v);
+	//	TVertex(float _x, float _y, float _z, float _u, float _v, D3DCOLOR _color);
 
 	// Position:
 
@@ -24,7 +25,7 @@ namespace dx9
 
 	// Color:
 
-		D3DCOLOR color;
+	//	D3DCOLOR color;
 
 	// Flexible vertex format:
 

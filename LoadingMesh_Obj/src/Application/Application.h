@@ -48,5 +48,6 @@ protected:
 // TEST
 //	dx9::TriangleShape m_Triangle;
 //	dx9::RectangleShape m_Rectangle;
-	dx9::SCube m_ShadedCube;
+//	dx9::SCube m_ShadedCube;
+	dx9::TCube m_TexturedCube;
 };

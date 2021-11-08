@@ -39,13 +39,16 @@ bool Application::Initialize(HINSTANCE hInstance, int32 nCmdShow)
 	m_Window.GenerateWindow(hInstance, nCmdShow, "Win32Window", "D3DX9 Win32 Window", m_Width, m_Height, m_hWnd);
 
 	// 2. Initialize Renderer.
-	m_RenderSystem.Initialize(m_hWnd, m_Width, m_Height, true);
+	m_RenderSystem.Initialize(m_hWnd, m_Width, m_Height, true);	
 
 	// 3. Create vertex buffer for specific object.
-	m_RenderSystem.GetGraphicDevice().CreateVertexBuffer(&m_ShadedCube);
+	m_RenderSystem.GetGraphicDevice().CreateVertexBuffer(&m_TexturedCube);
 	
 	// 4. Create index buffer for specific object.
-	m_RenderSystem.GetGraphicDevice().CreateIndexBuffer(&m_ShadedCube);
+	m_RenderSystem.GetGraphicDevice().CreateIndexBuffer(&m_TexturedCube);
+
+//	m_TexturedCube.SetTexture(m_RenderSystem.GetGraphicDevice().GetDirect3DDevice(), L"..\\..\\Resources\\Images\\Test_Image_32x32.png");
+	m_TexturedCube.SetTexture(m_RenderSystem.GetGraphicDevice().GetDirect3DDevice(), L"C:\\Users\\Admin\\Desktop\\Test_Image_100x100.png");
 
 	return true;
 }

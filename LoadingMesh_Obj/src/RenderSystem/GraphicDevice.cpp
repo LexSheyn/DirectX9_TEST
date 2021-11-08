@@ -97,13 +97,13 @@ namespace dx9
 		return true;
 	}
 	
-	bool GraphicDevice::CreateVertexBuffer(SCube* cube)
+	bool GraphicDevice::CreateVertexBuffer(TCube* cube)
 	{
 		m_VerticesCount   = cube->VerticesNumber;
 
 		void* pVertices;
 
-		m_Device->CreateVertexBuffer(cube->VerticesNumber * sizeof(SVertex), 0, SVertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
+		m_Device->CreateVertexBuffer(cube->VerticesNumber * sizeof(TVertex), 0, TVertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
 
 		m_VertexBuffer->Lock(0, sizeof(cube->Vertices), (void**)&pVertices, 0);
 
@@ -114,7 +114,7 @@ namespace dx9
 		return true;
 	}
 
-	bool GraphicDevice::CreateIndexBuffer(SCube* cube)
+	bool GraphicDevice::CreateIndexBuffer(TCube* cube)
 	{
 		m_IndicesCount    = cube->IndicesNumber;
 		m_PrimitivesCount = m_IndicesCount / 3;
@@ -152,9 +152,9 @@ namespace dx9
 	{
 		// Begin scene.
 		m_Device->BeginScene();
-		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(SVertex));
+		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(TVertex));
 		m_Device->SetIndices(m_IndexBuffer);
-		m_Device->SetFVF(SVertex::FVF);
+		m_Device->SetFVF(TVertex::FVF);
 
 		// TEST rectangle.
 		m_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_IndicesCount, 0, m_PrimitivesCount);

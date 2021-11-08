@@ -3,6 +3,7 @@
 #include "../RenderObject/2D/TriangleShape.h"
 #include "../RenderObject/2D/RectangleShape.h"
 #include "../RenderObject/3D/SCube.h"
+#include "../RenderObject/3D/TCube.h"
 
 namespace dx9
 {
@@ -21,9 +22,9 @@ namespace dx9
 		bool Initialize(HWND hWnd, int32 width, int32 height, bool windowed);
 
 		// REPLACE TriangleShape by Shape, AND ALSO REWORK Shape AND HERITOR CLASSES
-		bool CreateVertexBuffer(SCube* cube);
+		bool CreateVertexBuffer(TCube* cube);
 
-		bool CreateIndexBuffer(SCube* cube);
+		bool CreateIndexBuffer(TCube* cube);
 
 		void InvalidateDevice();
 

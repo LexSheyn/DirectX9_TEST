@@ -18,17 +18,41 @@ namespace dx9
 		//
 		// (0.1) -------- (1.1)
 
-		// Front face
-		Vertices[0] = TVertex( -1.0f,  1.0f, -1.0f, 0.0f, 0.0f, Color::Red );
-		Vertices[1] = TVertex(  1.0f,  1.0f, -1.0f, 1.0f, 0.0f, Color::Red );
-		Vertices[2] = TVertex( -1.0f, -1.0f, -1.0f, 0.0f, 1.0f, Color::Red );
-		Vertices[3] = TVertex(  1.0f, -1.0f, -1.0f, 1.0f, 1.0f, Color::Red );
+		// Front face.
+		Vertices[0] = TVertex( -1.0f,  1.0f, -1.0f, 0.0f, 0.0f );
+		Vertices[1] = TVertex(  1.0f,  1.0f, -1.0f, 1.0f, 0.0f );
+		Vertices[2] = TVertex( -1.0f, -1.0f, -1.0f, 0.0f, 1.0f );
+		Vertices[3] = TVertex(  1.0f, -1.0f, -1.0f, 1.0f, 1.0f );
 
-		// Back face
-		Vertices[4] = TVertex(  1.0f,  1.0f,  1.0f, 0.0f, 0.0f, Color::Red );
-		Vertices[5] = TVertex( -1.0f,  1.0f,  1.0f, 1.0f, 0.0f, Color::Red );
-		Vertices[6] = TVertex(  1.0f, -1.0f,  1.0f, 0.0f, 1.0f, Color::Red );
-		Vertices[7] = TVertex( -1.0f, -1.0f,  1.0f, 1.0f, 1.0f, Color::Red );
+		// Back face.
+		Vertices[4] = TVertex(  1.0f,  1.0f,  1.0f, 0.0f, 0.0f );
+		Vertices[5] = TVertex( -1.0f,  1.0f,  1.0f, 1.0f, 0.0f );
+		Vertices[6] = TVertex(  1.0f, -1.0f,  1.0f, 0.0f, 1.0f );
+		Vertices[7] = TVertex( -1.0f, -1.0f,  1.0f, 1.0f, 1.0f );
+
+		// Left face.
+		Vertices[8]  = TVertex( -1.0f,  1.0f,  1.0f, 0.0f, 0.0f );
+		Vertices[9]  = TVertex( -1.0f,  1.0f, -1.0f, 1.0f, 0.0f );
+		Vertices[10] = TVertex( -1.0f, -1.0f,  1.0f, 0.0f, 1.0f );
+		Vertices[11] = TVertex( -1.0f, -1.0f, -1.0f, 1.0f, 1.0f );
+
+		// Right face.
+		Vertices[12] = TVertex(  1.0f,  1.0f, -1.0f, 0.0f, 0.0f );
+		Vertices[13] = TVertex(  1.0f,  1.0f,  1.0f, 1.0f, 0.0f );
+		Vertices[14] = TVertex(  1.0f, -1.0f, -1.0f, 0.0f, 1.0f );
+		Vertices[15] = TVertex(  1.0f, -1.0f,  1.0f, 1.0f, 1.0f );
+
+		// Top face.
+		Vertices[16] = TVertex( -1.0f,  1.0f,  1.0f, 0.0f, 0.0f );
+		Vertices[17] = TVertex(  1.0f,  1.0f,  1.0f, 1.0f, 0.0f );
+		Vertices[18] = TVertex( -1.0f,  1.0f, -1.0f, 0.0f, 1.0f );
+		Vertices[19] = TVertex(  1.0f,  1.0f, -1.0f, 1.0f, 1.0f );
+
+		// Bottom face.
+		Vertices[20] = TVertex(  1.0f, -1.0f,  1.0f, 0.0f, 0.0f );
+		Vertices[21] = TVertex( -1.0f, -1.0f,  1.0f, 1.0f, 0.0f );
+		Vertices[22] = TVertex(  1.0f, -1.0f, -1.0f, 0.0f, 1.0f );
+		Vertices[23] = TVertex( -1.0f, -1.0f, -1.0f, 1.0f, 1.0f );
 	}
 
 	TCube::~TCube()
@@ -82,9 +106,14 @@ namespace dx9
 		m_Rotation = D3DXVECTOR3(x, y, z);
 	}
 
-	void TCube::SetTexture(const char* filePath)
+	void TCube::SetTexture(IDirect3DDevice9* device, LPCWSTR filePath)
 	{
-		m_TexturePath = filePath;
+	//	m_TexturePath = filePath;
+
+		if (D3DXCreateTextureFromFile(device, filePath, &m_Texture) == D3D_OK)
+		{
+			MessageBox(nullptr, L"D3D_OK", NULL, NULL);
+		}
 	}
 
 }

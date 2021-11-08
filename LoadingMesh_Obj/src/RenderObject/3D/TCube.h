@@ -36,7 +36,7 @@ namespace dx9
 		void SetScale(D3DXVECTOR3 scale);
 		void SetScale(float x, float y, float z);
 
-		void SetTexture(const char* filePath);
+		void SetTexture(IDirect3DDevice9* device, LPCWSTR filePath);
 
 	// Temporary Public Variables:
 
@@ -54,24 +54,24 @@ namespace dx9
 			2, 1, 3,
 
 			// Back face.
-			5, 4, 7,
-			7, 4, 6,
-
-			// Right face.
-			1, 5, 3,
-			3, 5, 7,
+			4, 5, 6,
+			6, 5, 7,
 
 			// Left face.
-			4, 0, 6,
-			6, 0, 2,
+			8, 9, 10,
+			10, 9, 11,
+
+			// Right face.
+			12, 13, 14,
+			14, 13, 15,
 
 			// Top face.
-			4, 5, 0,
-			0, 5, 1,
+			16, 17, 18,
+			18, 17, 19,
 
 			// Bottom face.
-			2, 3, 6,
-			6, 3, 7
+			20, 21, 22,
+			22, 21, 23
 		};
 
 	private:
