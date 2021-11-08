@@ -139,27 +139,28 @@ namespace dx9
 
 		return true;
 	}
-	
-	void GraphicDevice::ClearBeginEndPresent(D3DCOLOR color)
+
+	void GraphicDevice::Clear(D3DCOLOR color)
 	{
 		// Clear scene with certain color.
 		// 2nd parameter is set to 'nullptr' so that it clears the entire back buffer.
 		m_Device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, color, 1.0f, 0);
+	}
 
+	void GraphicDevice::Begin()
+	{
 		// Begin scene.
 		m_Device->BeginScene();
 
 		// TEST
-		x += 0.010f;
-		y += 0.010f;
-		z += 0.005f;
-		D3DXMatrixRotationX(&m_RotationMatrix_X, x);
-		D3DXMatrixRotationY(&m_RotationMatrix_Y, y);
-		D3DXMatrixRotationZ(&m_RotationMatrix_Z, z);
-		m_SceneMatrix = m_RotationMatrix_X * m_RotationMatrix_Y * m_RotationMatrix_Z;
-		m_Device->SetTransform(D3DTS_WORLD, &m_SceneMatrix);
-
-
+	//	x += 0.010f;
+	//	y += 0.010f;
+	//	z += 0.005f;
+	//	D3DXMatrixRotationX(&m_RotationMatrix_X, x);
+	//	D3DXMatrixRotationY(&m_RotationMatrix_Y, y);
+	//	D3DXMatrixRotationZ(&m_RotationMatrix_Z, z);
+	//	m_SceneMatrix = m_RotationMatrix_X * m_RotationMatrix_Y * m_RotationMatrix_Z;
+	//	m_Device->SetTransform(D3DTS_WORLD, &m_SceneMatrix);
 
 
 		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(Vertex));
@@ -168,10 +169,16 @@ namespace dx9
 
 		// TEST rectangle.
 		m_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_IndicesCount, 0, m_PrimitivesCount);
+	}
 
+	void GraphicDevice::End()
+	{
 		// End scene.
 		m_Device->EndScene();
+	}
 
+	void GraphicDevice::Present()
+	{
 		// Present scene to the window.
 		m_Device->Present(nullptr, nullptr, nullptr, nullptr);
 	}

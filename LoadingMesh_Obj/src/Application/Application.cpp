@@ -22,7 +22,7 @@ Application::Application()
 	// Time.
 	m_TimeBegin = 0;
 	m_TimeEnd   = 0;
-	m_DeltaTime = 0.0f;
+	m_DeltaTime = 0.018f;
 }
 
 Application::~Application()
@@ -66,9 +66,9 @@ int32 Application::Run()
 		}
 		else
 		{
-			m_Updater.Update(1.0f);
+			m_Updater.Update(0.01f);
 
-			m_RenderSystem.Render();			
+			m_RenderSystem.Render(0.01f);
 		}
 
 		m_TimeEnd = GetTickCount64();

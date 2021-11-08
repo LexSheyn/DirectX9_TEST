@@ -18,11 +18,11 @@ namespace dx9
 
 		void Update(const float& dt);
 
-		void Rotate_X(float offsetAngle_X);
+		void Rotate_X(float offsetAngle_X, const float& dt);
 
-		void Rotate_Y(float offsetAngle_Y);
+		void Rotate_Y(float offsetAngle_Y, const float& dt);
 
-		void Rotate_Z(float offsetAngle_Z);
+		void Rotate_Z(float offsetAngle_Z, const float& dt);
 
 	// Accessors:
 

@@ -37,37 +37,45 @@ namespace dx9
 	
 	void Camera::Update(const float& dt)
 	{
-		// X Y Z rotations.
-	//	D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X * dt);
-	//	D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y * dt);
-	//	D3DXMatrixRotationZ(m_RotationMatrixPtr_Z, m_RotationAngle_Z * dt);
-
-		// Final SceneMatrix rotation.
-	//	*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y) * (*m_RotationMatrixPtr_Z);
-	//	*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y);
 	}
 	
-	void Camera::Rotate_X(float offsetAngle_X)
+	void Camera::Rotate_X(float offsetAngle_X, const float& dt)
 	{
-		m_RotationAngle_X += offsetAngle_X;
+		m_RotationAngle_X += offsetAngle_X * dt;
 
 		D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X);
-
-		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y);
-	}
-
-	void Camera::Rotate_Y(float offsetAngle_Y)
-	{
-		m_RotationAngle_Y += offsetAngle_Y;
-
 		D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y);
+		D3DXMatrixRotationZ(m_RotationMatrixPtr_Z, m_RotationAngle_Z);
 
-		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y);
+		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y) * (*m_RotationMatrixPtr_Z);
+
+		m_DevicePtr->SetTransform(D3DTS_WORLD, m_SceneMatrixPtr);
 	}
 
-	void Camera::Rotate_Z(float offsetAngle_Z)
+	void Camera::Rotate_Y(float offsetAngle_Y, const float& dt)
 	{
-		m_RotationAngle_Z += offsetAngle_Z;
+		m_RotationAngle_Y += offsetAngle_Y * dt;
+
+		D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X);
+		D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y);
+		D3DXMatrixRotationZ(m_RotationMatrixPtr_Z, m_RotationAngle_Z);
+
+		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y) * (*m_RotationMatrixPtr_Z);
+
+		m_DevicePtr->SetTransform(D3DTS_WORLD, m_SceneMatrixPtr);
+	}
+
+	void Camera::Rotate_Z(float offsetAngle_Z, const float& dt)
+	{
+		m_RotationAngle_Z += offsetAngle_Z * dt;
+
+		D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X);
+		D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y);
+		D3DXMatrixRotationZ(m_RotationMatrixPtr_Z, m_RotationAngle_Z);
+
+		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y) * (*m_RotationMatrixPtr_Z);
+
+		m_DevicePtr->SetTransform(D3DTS_WORLD, m_SceneMatrixPtr);
 	}
 
 

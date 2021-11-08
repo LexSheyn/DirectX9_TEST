@@ -38,9 +38,17 @@ namespace dx9
 		m_Camera.SetPosition(position, target, up);
 	}
 
-	void RenderSystem::Render()
+	void RenderSystem::Render(const float& dt)
 	{
-		m_GraphicDevice.ClearBeginEndPresent(Color::Black);
+		m_GraphicDevice.Clear(Color::Black);
+
+		m_Camera.Rotate_X(1.0f, dt);
+		m_Camera.Rotate_Y(1.0f, dt);
+		m_Camera.Rotate_Z(1.0f, dt);
+
+		m_GraphicDevice.Begin();
+		m_GraphicDevice.End();
+		m_GraphicDevice.Present();
 	}
 
 

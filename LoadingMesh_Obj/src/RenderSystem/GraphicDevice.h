@@ -24,8 +24,14 @@ namespace dx9
 		bool CreateVertexBuffer(SCube* cube);
 
 		bool CreateIndexBuffer(SCube* cube);
-		
-		void ClearBeginEndPresent(D3DCOLOR color);
+
+		void Clear(D3DCOLOR color);
+
+		void Begin();
+
+		void End();
+
+		void Present();
 
 	// Accessors:
 

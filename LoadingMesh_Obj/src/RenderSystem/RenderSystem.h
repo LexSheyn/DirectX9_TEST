@@ -18,7 +18,7 @@ namespace dx9
 
 		void Initialize(HWND hWnd, int32 width, int32 height, bool windowed);
 
-		void Render();
+		void Render(const float& dt);
 
 	// Accessors:
 

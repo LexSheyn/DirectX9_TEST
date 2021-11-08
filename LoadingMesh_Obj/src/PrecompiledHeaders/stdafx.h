@@ -22,6 +22,7 @@ typedef unsigned long long uint64;
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <ctime>
 
 // DirectX 9
 #include <d3d9.h>

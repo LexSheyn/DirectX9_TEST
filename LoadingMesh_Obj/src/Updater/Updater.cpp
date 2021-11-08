@@ -24,6 +24,7 @@ namespace dx9
 
 	void Updater::Update(const float& dt)
 	{
-		m_RenderSystemPtr->GetCamera().Update(dt);
+	//	m_RenderSystemPtr->GetCamera().Update(dt);
+	//	m_RenderSystemPtr->GetCamera().Rotate_X(1.0f, dt);
 	}
 }
