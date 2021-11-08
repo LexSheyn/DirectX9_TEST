@@ -11,8 +11,12 @@ namespace dx9
 		m_Device   = nullptr;
 		m_Direct3d = nullptr;
 
-		m_d3dpp    = { 0 };
+		m_D3DPresentParameters = { 0 };
+
 		m_Viewport = { 0 };
+
+		b_HandleDeviceLost = false;
+		b_DeviceLost       = false;
 
 		// Vertexes.
 		m_VertexBuffer = nullptr;
@@ -22,26 +26,14 @@ namespace dx9
 		m_VerticesCount   = 0;
 		m_IndicesCount    = 0;
 		m_PrimitivesCount = 0;
-
-		// TEST
-		x = 0.0f;
-		y = 0.0f;
-		z = 0.0f;
 	}
 	
 	GraphicDevice::~GraphicDevice()
 	{
-		if (m_Device)
-		{
-			m_Device->Release();
-			m_Device = nullptr;
-		}
-
-		if (m_Direct3d)
-		{
-			m_Direct3d->Release();
-			m_Direct3d = nullptr;
-		}
+		dx9::Release(m_Device);
+		dx9::Release(m_Direct3d);
+		dx9::Release(m_VertexBuffer);
+		dx9::Release(m_IndexBuffer);
 	}
 	
 
@@ -57,22 +49,22 @@ namespace dx9
 			return false;
 		}
 
-		ZeroMemory(&m_d3dpp, sizeof(D3DPRESENT_PARAMETERS));
+		ZeroMemory(&m_D3DPresentParameters, sizeof(D3DPRESENT_PARAMETERS));
 
-		m_d3dpp.BackBufferWidth            = width;
-		m_d3dpp.BackBufferHeight           = height;
-		m_d3dpp.Windowed                   = windowed;
-		m_d3dpp.BackBufferCount            = 1;
-		m_d3dpp.BackBufferFormat           = D3DFMT_A8R8G8B8;
-		m_d3dpp.MultiSampleType            = D3DMULTISAMPLE_NONE;
-		m_d3dpp.MultiSampleQuality         = 0;		
-		m_d3dpp.hDeviceWindow              = hWnd;
-		m_d3dpp.Flags                      = 0;
-		m_d3dpp.EnableAutoDepthStencil     = true;
-		m_d3dpp.AutoDepthStencilFormat     = D3DFMT_D24S8;
-		m_d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
-		m_d3dpp.PresentationInterval       = D3DPRESENT_INTERVAL_IMMEDIATE;
-		m_d3dpp.SwapEffect                 = D3DSWAPEFFECT_DISCARD;
+		m_D3DPresentParameters.BackBufferWidth            = width;
+		m_D3DPresentParameters.BackBufferHeight           = height;
+		m_D3DPresentParameters.Windowed                   = windowed;
+		m_D3DPresentParameters.BackBufferCount            = 1;
+		m_D3DPresentParameters.BackBufferFormat           = D3DFMT_A8R8G8B8;
+		m_D3DPresentParameters.MultiSampleType            = D3DMULTISAMPLE_NONE;
+		m_D3DPresentParameters.MultiSampleQuality         = 0;		
+		m_D3DPresentParameters.hDeviceWindow              = hWnd;
+		m_D3DPresentParameters.Flags                      = 0;
+		m_D3DPresentParameters.EnableAutoDepthStencil     = true;
+		m_D3DPresentParameters.AutoDepthStencilFormat     = D3DFMT_D24S8;
+		m_D3DPresentParameters.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
+		m_D3DPresentParameters.PresentationInterval       = D3DPRESENT_INTERVAL_IMMEDIATE;
+		m_D3DPresentParameters.SwapEffect                 = D3DSWAPEFFECT_DISCARD;
 
 		// Create the device.
 		// D3DADAPTER_DEFAULT - Primary display adapter (default graphics card).
@@ -82,7 +74,7 @@ namespace dx9
 			                     D3DDEVTYPE_HAL,
 		                         hWnd,
 		                         D3DCREATE_MIXED_VERTEXPROCESSING,
-			                     &m_d3dpp,
+			                     &m_D3DPresentParameters,
 			                     &m_Device);
 
 		if (!m_Device)
@@ -111,7 +103,7 @@ namespace dx9
 
 		void* pVertices;
 
-		m_Device->CreateVertexBuffer(cube->VerticesNumber * sizeof(Vertex), 0, Vertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
+		m_Device->CreateVertexBuffer(cube->VerticesNumber * sizeof(SVertex), 0, SVertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
 
 		m_VertexBuffer->Lock(0, sizeof(cube->Vertices), (void**)&pVertices, 0);
 
@@ -140,6 +132,15 @@ namespace dx9
 		return true;
 	}
 
+	void GraphicDevice::InvalidateDevice()
+	{
+
+	}
+
+	void GraphicDevice::RestoreDevice()
+	{
+	}
+
 	void GraphicDevice::Clear(D3DCOLOR color)
 	{
 		// Clear scene with certain color.
@@ -151,21 +152,9 @@ namespace dx9
 	{
 		// Begin scene.
 		m_Device->BeginScene();
-
-		// TEST
-	//	x += 0.010f;
-	//	y += 0.010f;
-	//	z += 0.005f;
-	//	D3DXMatrixRotationX(&m_RotationMatrix_X, x);
-	//	D3DXMatrixRotationY(&m_RotationMatrix_Y, y);
-	//	D3DXMatrixRotationZ(&m_RotationMatrix_Z, z);
-	//	m_SceneMatrix = m_RotationMatrix_X * m_RotationMatrix_Y * m_RotationMatrix_Z;
-	//	m_Device->SetTransform(D3DTS_WORLD, &m_SceneMatrix);
-
-
-		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(Vertex));
+		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(SVertex));
 		m_Device->SetIndices(m_IndexBuffer);
-		m_Device->SetFVF(Vertex::FVF);
+		m_Device->SetFVF(SVertex::FVF);
 
 		// TEST rectangle.
 		m_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_IndicesCount, 0, m_PrimitivesCount);
@@ -209,5 +198,15 @@ namespace dx9
 	D3DXMATRIX* GraphicDevice::GetRotationMatrix_Z()
 	{
 		return &m_RotationMatrix_Z;
+	}
+	
+	D3DXMATRIX* GraphicDevice::GetScaleMatrix()
+	{
+		return &m_ScaleMatrix;
+	}
+	
+	D3DXMATRIX* GraphicDevice::GetTranslationMatrix()
+	{
+		return &m_TranslationMatrix;
 	}
 }

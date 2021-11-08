@@ -26,8 +26,11 @@ namespace dx9
 		m_ScreenHeight = height;
 
 		// Setup camera.
-		m_Camera.SetDevice(m_GraphicDevice.GetDirect3DDevice());
-		m_Camera.SetMatrices(m_GraphicDevice.GetSceneMatrix(), m_GraphicDevice.GetRotationMatrix_X(), m_GraphicDevice.GetRotationMatrix_Y(), m_GraphicDevice.GetRotationMatrix_Z());
+		m_Camera.InitDevice(m_GraphicDevice.GetDirect3DDevice());
+		m_Camera.InitMatrices(m_GraphicDevice.GetSceneMatrix(), 
+			                  m_GraphicDevice.GetRotationMatrix_X(), m_GraphicDevice.GetRotationMatrix_Y(), m_GraphicDevice.GetRotationMatrix_Z(),
+			                  m_GraphicDevice.GetScaleMatrix(), m_GraphicDevice.GetTranslationMatrix());
+
 		m_Camera.SetAspectRatio(static_cast<float>(width) / static_cast<float>(height));
 
 		// TEST position.

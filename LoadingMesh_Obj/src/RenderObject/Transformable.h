@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Vertex.h"
+#include "SVertex.h"
+#include "TVertex.h"
 
 namespace dx9
 {

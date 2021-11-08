@@ -1,28 +1,39 @@
+#ifndef TCUBE_H
+#define TCUBE_H
+
 #pragma once
 
 #include "../Transformable.h"
 
 namespace dx9
 {
-	class SCube : public Transformable
+	class TCube : public Transformable
 	{
 	public:
 
-	// Constructors and Destructor:
+	// Constructors and Destructors:
 
-		SCube();
+		TCube();
 
-		~SCube();
+		~TCube();
 
 	// Functions:
 
 		//
 
+	// Accessors:
+
+		//
+
+	// Modifiers:
+
+		void SetTexture(const char* filePath);
+
 	// Temporary Public Variables:
 
-		static const uint32 VerticesNumber = 8;
+		static const uint32 VerticesNumber = 24;
 
-		SVertex Vertices[VerticesNumber];
+		TVertex Vertices[VerticesNumber];
 
 		static const uint32 IndicesNumber = 36;
 
@@ -55,3 +66,4 @@ namespace dx9
 		};
 	};
 }
+#endif // TCUBE_H

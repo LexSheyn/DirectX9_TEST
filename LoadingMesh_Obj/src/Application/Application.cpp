@@ -41,10 +41,10 @@ bool Application::Initialize(HINSTANCE hInstance, int32 nCmdShow)
 	// 2. Initialize Renderer.
 	m_RenderSystem.Initialize(m_hWnd, m_Width, m_Height, true);
 
-	// 3. Create vertex buffer for specific shape.
+	// 3. Create vertex buffer for specific object.
 	m_RenderSystem.GetGraphicDevice().CreateVertexBuffer(&m_ShadedCube);
 	
-	// 4. Create index buffer for specific shape.
+	// 4. Create index buffer for specific object.
 	m_RenderSystem.GetGraphicDevice().CreateIndexBuffer(&m_ShadedCube);
 
 	return true;
@@ -52,17 +52,15 @@ bool Application::Initialize(HINSTANCE hInstance, int32 nCmdShow)
 
 int32 Application::Run()
 {
-	MSG msg = { 0 };
+	m_Message = { 0 };
 
-	while (msg.message != WM_QUIT)
+	while (m_Message.message != WM_QUIT)
 	{
-		m_TimeBegin = GetTickCount64();
-
-		if (PeekMessageA(&msg, NULL, 0, 0, PM_REMOVE))
+		if (PeekMessageA(&m_Message, NULL, 0, 0, PM_REMOVE))
 		{
-			TranslateMessage(&msg);
+			TranslateMessage(&m_Message);
 
-			DispatchMessageA(&msg);
+			DispatchMessageA(&m_Message);
 		}
 		else
 		{
@@ -71,13 +69,14 @@ int32 Application::Run()
 			m_RenderSystem.Render(0.01f);
 		}
 
-		m_TimeEnd = GetTickCount64();
-
-		m_DeltaTime = static_cast<float>(m_TimeEnd - m_TimeBegin);
-
 		// ~ 60 FPS
 		std::this_thread::sleep_for(std::chrono::milliseconds(15));
 	}
 
-	return static_cast<int32>(msg.wParam);
+	return static_cast<int32>(m_Message.wParam);
+}
+
+void Application::ShutDown()
+{
+	//
 }

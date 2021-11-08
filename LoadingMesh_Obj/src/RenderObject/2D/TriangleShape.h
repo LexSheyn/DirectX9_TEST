@@ -26,7 +26,7 @@ namespace dx9
 
 		static const uint32 VerticesNumber = 3;
 
-		Vertex Vertices[VerticesNumber];
+		SVertex Vertices[VerticesNumber];
 
 		static const uint32 IndicesNumber = 3;
 

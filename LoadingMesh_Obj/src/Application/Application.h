@@ -21,6 +21,8 @@ public:
 
 	int32 Run();
 
+	void ShutDown();
+
 protected:
 
 // Attributes:
@@ -30,9 +32,11 @@ protected:
 	int32  m_Width;
 	int32  m_Height;
 
+	MSG m_Message;
+
 	// Time.
-	uint64 m_TimeBegin;
-	uint64 m_TimeEnd;
+	int64 m_TimeBegin;
+	int64 m_TimeEnd;
 	float  m_DeltaTime;
 	
 	dx9::Window  m_Window;

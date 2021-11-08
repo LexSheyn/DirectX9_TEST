@@ -30,9 +30,11 @@ namespace dx9
 
 	// Modifiers:
 
-		void SetDevice(IDirect3DDevice9* device);
+		void InitDevice(IDirect3DDevice9* device);
 
-		void SetMatrices(D3DXMATRIX* sceneMatrix, D3DXMATRIX* rotationMatrix_X, D3DXMATRIX* rotationMatrix_Y, D3DXMATRIX* rotationMatrix_Z);
+		void InitMatrices(D3DXMATRIX* sceneMatrix, 
+			              D3DXMATRIX* rotationMatrix_X, D3DXMATRIX* rotationMatrix_Y, D3DXMATRIX* rotationMatrix_Z,
+		                  D3DXMATRIX* scaleMatrix, D3DXMATRIX* translationMatrix);
 
 		void SetFovY(float fovY);
 
@@ -46,7 +48,15 @@ namespace dx9
 		
 		void SetRotation_Z(float angle_Z);
 
+		void SetScale(float scale_X, float scale_Y, float scale_Z);
+
+		void SetTranslation(float translation_X, float translation_Y, float translation_Z);
+
 	private:
+
+	// Private Functions:
+
+		void SetTransformToMatrix();
 
 	// Variables:
 
@@ -68,8 +78,16 @@ namespace dx9
 		D3DXMATRIX* m_RotationMatrixPtr_X;
 		D3DXMATRIX* m_RotationMatrixPtr_Y;
 		D3DXMATRIX* m_RotationMatrixPtr_Z;
+		D3DXMATRIX* m_ScaleMatrixPtr;
+		D3DXMATRIX* m_TranslationMatrixPtr;
 		float m_RotationAngle_X;
 		float m_RotationAngle_Y;
 		float m_RotationAngle_Z;
+		float m_Scale_X;
+		float m_Scale_Y;
+		float m_Scale_Z;
+		float m_Translation_X;
+		float m_Translation_Y;
+		float m_Translation_Z;
 	};
 }

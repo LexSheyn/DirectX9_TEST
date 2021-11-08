@@ -19,13 +19,23 @@ namespace dx9
 		m_DevicePtr = nullptr;
 
 		// Rotation
-		m_SceneMatrixPtr      = nullptr;
-		m_RotationMatrixPtr_X = nullptr;
-		m_RotationMatrixPtr_Y = nullptr;
-		m_RotationMatrixPtr_Z = nullptr;
+		m_SceneMatrixPtr       = nullptr;
+		m_RotationMatrixPtr_X  = nullptr;
+		m_RotationMatrixPtr_Y  = nullptr;
+		m_RotationMatrixPtr_Z  = nullptr;
+		m_ScaleMatrixPtr       = nullptr;
+		m_TranslationMatrixPtr = nullptr;
 		m_RotationAngle_X     = 0.0f;
 		m_RotationAngle_Y     = 0.0f;
 		m_RotationAngle_Z     = 0.0f;
+
+		m_Scale_X = 1.0f;
+		m_Scale_Y = 1.0f;
+		m_Scale_Z = 1.0f;
+
+		m_Translation_X = 1.0f;
+		m_Translation_Y = 1.0f;
+		m_Translation_Z = 1.0f;
 	}
 	
 	Camera::~Camera()
@@ -43,39 +53,21 @@ namespace dx9
 	{
 		m_RotationAngle_X += offsetAngle_X * dt;
 
-		D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X);
-		D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y);
-		D3DXMatrixRotationZ(m_RotationMatrixPtr_Z, m_RotationAngle_Z);
-
-		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y) * (*m_RotationMatrixPtr_Z);
-
-		m_DevicePtr->SetTransform(D3DTS_WORLD, m_SceneMatrixPtr);
+		this->SetTransformToMatrix();
 	}
 
 	void Camera::Rotate_Y(float offsetAngle_Y, const float& dt)
 	{
 		m_RotationAngle_Y += offsetAngle_Y * dt;
 
-		D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X);
-		D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y);
-		D3DXMatrixRotationZ(m_RotationMatrixPtr_Z, m_RotationAngle_Z);
-
-		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y) * (*m_RotationMatrixPtr_Z);
-
-		m_DevicePtr->SetTransform(D3DTS_WORLD, m_SceneMatrixPtr);
+		this->SetTransformToMatrix();
 	}
 
 	void Camera::Rotate_Z(float offsetAngle_Z, const float& dt)
 	{
 		m_RotationAngle_Z += offsetAngle_Z * dt;
 
-		D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X);
-		D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y);
-		D3DXMatrixRotationZ(m_RotationMatrixPtr_Z, m_RotationAngle_Z);
-
-		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y) * (*m_RotationMatrixPtr_Z);
-
-		m_DevicePtr->SetTransform(D3DTS_WORLD, m_SceneMatrixPtr);
+		this->SetTransformToMatrix();
 	}
 
 
@@ -85,17 +77,24 @@ namespace dx9
 
 // Modifiers:
 
-	void Camera::SetDevice(IDirect3DDevice9* device)
+	void Camera::InitDevice(IDirect3DDevice9* device)
 	{
 		m_DevicePtr = device;
 	}
 
-	void Camera::SetMatrices(D3DXMATRIX* sceneMatrix, D3DXMATRIX* rotationMatrix_X, D3DXMATRIX* rotationMatrix_Y, D3DXMATRIX* rotationMatrix_Z)
+	void Camera::InitMatrices(D3DXMATRIX* sceneMatrix, 
+			                  D3DXMATRIX* rotationMatrix_X, D3DXMATRIX* rotationMatrix_Y, D3DXMATRIX* rotationMatrix_Z,
+		                      D3DXMATRIX* scaleMatrix, D3DXMATRIX* translationMatrix)
 	{
-		m_SceneMatrixPtr      = sceneMatrix;
+		m_SceneMatrixPtr = sceneMatrix;
+
 		m_RotationMatrixPtr_X = rotationMatrix_X;
 		m_RotationMatrixPtr_Y = rotationMatrix_Y;
 		m_RotationMatrixPtr_Z = rotationMatrix_Z;
+
+		m_ScaleMatrixPtr = scaleMatrix;
+
+		m_TranslationMatrixPtr = translationMatrix;
 	}
 
 	void Camera::SetFovY(float fovY)
@@ -134,5 +133,35 @@ namespace dx9
 	void Camera::SetRotation_Z(float angle_Z)
 	{
 		m_RotationAngle_Z = angle_Z;
+	}
+	
+	void Camera::SetScale(float scale_X, float scale_Y, float scale_Z)
+	{
+		m_Scale_X = scale_X;
+		m_Scale_Y = scale_Y;
+		m_Scale_Z = scale_Z;
+	}
+	
+	void Camera::SetTranslation(float translation_X, float translation_Y, float translation_Z)
+	{
+		m_Translation_X = translation_X;
+		m_Translation_Y = translation_Y;
+		m_Translation_Z = translation_Z;
+	}
+	
+	
+// Private Functions:
+
+	void Camera::SetTransformToMatrix()
+	{
+		D3DXMatrixRotationX(m_RotationMatrixPtr_X, m_RotationAngle_X);
+		D3DXMatrixRotationY(m_RotationMatrixPtr_Y, m_RotationAngle_Y);
+		D3DXMatrixRotationZ(m_RotationMatrixPtr_Z, m_RotationAngle_Z);
+		D3DXMatrixScaling(m_ScaleMatrixPtr, m_Scale_X, m_Scale_Y, m_Scale_Z);
+		D3DXMatrixScaling(m_TranslationMatrixPtr, m_Translation_X, m_Translation_Y, m_Translation_Z);
+
+		*m_SceneMatrixPtr = (*m_RotationMatrixPtr_X) * (*m_RotationMatrixPtr_Y) * (*m_RotationMatrixPtr_Z) * (*m_ScaleMatrixPtr) * (*m_TranslationMatrixPtr);
+
+		m_DevicePtr->SetTransform(D3DTS_WORLD, m_SceneMatrixPtr);
 	}
 }
