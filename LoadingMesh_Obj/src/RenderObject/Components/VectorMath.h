@@ -1,9 +1,10 @@
-#pragma once
+#ifndef VECTORMATH_H
+#define VECTORMATH_H
 
 #include "Vector2f.h"
 #include "Vector3f.h"
 
-namespace dx9
+namespace gfx
 {
 // Cross product:
 
@@ -64,3 +65,5 @@ namespace dx9
 	// Check to see if a Vector3 Point is within a 3 Vector3 Triangle.
 	bool inTriangle(Vector3f point, Vector3f tri1, Vector3f tri2, Vector3f tri3);
 }
+
+#endif // VERTORMATH_H

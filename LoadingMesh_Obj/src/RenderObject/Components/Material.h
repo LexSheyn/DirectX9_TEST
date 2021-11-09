@@ -1,8 +1,9 @@
-#pragma once
+#ifndef MATERIAL_H
+#define MATERIAL_H
 
 #include "Vector3f.h"
 
-namespace dx9
+namespace gfx
 {
 	class Material
 	{
@@ -57,3 +58,5 @@ namespace dx9
 		std::string MapBump;
 	};
 }
+
+#endif // MATERIAL_H

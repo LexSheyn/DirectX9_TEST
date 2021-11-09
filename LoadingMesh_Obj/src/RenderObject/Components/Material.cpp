@@ -1,7 +1,7 @@
 #include "../../PrecompiledHeaders/stdafx.h"
 #include "Material.h"
 
-namespace dx9
+namespace gfx
 {
 // Constructor:
 

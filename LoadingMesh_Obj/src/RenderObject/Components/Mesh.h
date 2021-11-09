@@ -1,12 +1,10 @@
 #ifndef MESH_H
 #define MESH_H
 
-#pragma once
-
 #include "Vertex.h"
 #include "Material.h"
 
-namespace dx9
+namespace gfx
 {
 	class Mesh
 	{

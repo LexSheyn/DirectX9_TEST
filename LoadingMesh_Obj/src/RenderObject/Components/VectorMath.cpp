@@ -1,7 +1,7 @@
 #include "../../PrecompiledHeaders/stdafx.h"
 #include "VectorMath.h"
 
-namespace dx9
+namespace gfx
 {
 // Cross Product:
 

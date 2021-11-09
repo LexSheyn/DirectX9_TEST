@@ -1,7 +1,7 @@
 #include "../../PrecompiledHeaders/stdafx.h"
 #include "Vector2f.h"
 
-namespace dx9
+namespace gfx
 {
 // Constructors:
 

@@ -1,7 +1,7 @@
 #include "../../PrecompiledHeaders/stdafx.h"
 #include "Mesh.h"
 
-namespace dx9
+namespace gfx
 {
 // Constructors:
 

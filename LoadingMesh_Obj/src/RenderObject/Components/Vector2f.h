@@ -1,6 +1,7 @@
-#pragma once
+#ifndef VECTOR2F_H
+#define VECTOR2F_H
 
-namespace dx9
+namespace gfx
 {
 	class Vector2f
 	{
@@ -31,3 +32,5 @@ namespace dx9
 		float y;
 	};
 }
+
+#endif // VECTOR2F_H

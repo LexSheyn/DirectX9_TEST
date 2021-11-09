@@ -1,9 +1,9 @@
-#pragma once
+#ifndef VERTEX_H
+#define VERTEX_H
 
-#include "Vector2f.h"
-#include "Vector3f.h"
+#include "VectorMath.h"
 
-namespace dx9
+namespace gfx
 {
 	class Vertex
 	{
@@ -18,3 +18,5 @@ namespace dx9
 		Vector2f TextureCoordinate;
 	};
 }
+
+#endif // MESH_H

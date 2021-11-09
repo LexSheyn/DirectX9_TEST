@@ -1,5 +1,4 @@
-#include "../../PrecompiledHeaders/stdafx.h"
-#include "Mesh.h"
+#include "../PrecompiledHeaders/stdafx.h"
 #include "Tools.h"
 
 namespace tool

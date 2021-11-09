@@ -171,6 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Tools\Loader.cpp" />
     <ClCompile Include="src\Tools\Tools.cpp" />
     <ClCompile Include="src\RenderObject\Components\VectorMath.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
@@ -290,6 +291,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Tools\Loader.h" />
     <ClInclude Include="src\Tools\Tools.h" />
     <ClInclude Include="src\RenderObject\Components\VectorMath.h" />
     <ClInclude Include="src\RenderObject\Components\Mesh.h" />

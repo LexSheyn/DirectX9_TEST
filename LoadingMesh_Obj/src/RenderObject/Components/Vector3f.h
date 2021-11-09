@@ -1,6 +1,7 @@
-#pragma once
+#ifndef VECTOR3F_H
+#define VECTOR3F_H
 
-namespace dx9
+namespace gfx
 {
 	class Vector3f
 	{
@@ -34,3 +35,5 @@ namespace dx9
 		float z;
 	};
 }
+
+#endif // VECTOR3F_H
