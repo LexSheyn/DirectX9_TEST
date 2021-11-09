@@ -1,19 +1,22 @@
 #include "../../PrecompiledHeaders/stdafx.h"
-#include "Mesh.h"
+#include "MVertex.h"
 
 namespace dx9
 {
 // Constructors and Destructor:
 
-	Mesh::Mesh()
+	MVertex::MVertex()
 	{
+		TextureU = 0.0f;
+		TextureV = 0.0f;
 	}
 
-	Mesh::~Mesh()
+	MVertex::~MVertex()
 	{
 	}
 
 
 // Functions:
 
+	//
 }

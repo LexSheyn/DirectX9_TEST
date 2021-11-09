@@ -18,6 +18,7 @@ typedef unsigned long long uint64;
 
 // C++ core
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <vector>
 #include <thread>
