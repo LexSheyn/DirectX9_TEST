@@ -93,6 +93,9 @@
     <ClCompile Include="src\RenderObject\Components\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\RenderObject\Components\VectorMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PrecompiledHeaders\stdafx.h">
@@ -168,6 +171,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RenderObject\Components\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderObject\Components\VectorMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

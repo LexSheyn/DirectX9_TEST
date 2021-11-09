@@ -171,6 +171,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\RenderObject\Components\VectorMath.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\RenderObject\Components\Mesh.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
@@ -284,6 +290,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\RenderObject\Components\VectorMath.h" />
     <ClInclude Include="src\RenderObject\Components\Mesh.h" />
     <ClInclude Include="src\RenderObject\Components\Material.h" />
     <ClInclude Include="src\RenderObject\Vertex\MVertex.h" />

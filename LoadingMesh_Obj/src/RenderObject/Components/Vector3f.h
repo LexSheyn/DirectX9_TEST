@@ -23,6 +23,8 @@ namespace dx9
 		
 		Vector3f operator * (const float& other) const;
 
+		friend Vector3f operator * (const float& left, const Vector3f& right);
+
 		Vector3f operator / (const float& other) const;
 
 	// Variables:

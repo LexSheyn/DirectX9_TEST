@@ -47,6 +47,11 @@ namespace dx9
 		return Vector3f(x * other, y * other, z * other);
 	}
 
+	Vector3f operator * (const float& left, const Vector3f& right)
+	{
+		return Vector3f(left * right.x, left * right.y, left * right.z);
+	}
+
 	Vector3f Vector3f::operator / (const float& other) const
 	{
 		return Vector3f(x / other, y / other, z / other);
