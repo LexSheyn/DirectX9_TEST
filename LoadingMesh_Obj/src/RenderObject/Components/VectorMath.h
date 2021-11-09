@@ -46,4 +46,21 @@ namespace dx9
 	// Projection Calculation of a onto b.
 	Vector3f Projection(const Vector3f a, const Vector3f b);
 
+
+// Same Size:
+
+	// A test to see if P1 is on the same side as P2 of a line segment ab.
+	bool SameSide(Vector3f p1, Vector3f p2, Vector3f a, Vector3f b);
+
+
+// Generate Triangle Normal:
+
+	// Generate a cross produect normal for a triangle.
+	Vector3f GenerateTriangleNormal(Vector3f t1, Vector3f t2, Vector3f t3);
+
+
+// In Triangle:
+
+	// Check to see if a Vector3 Point is within a 3 Vector3 Triangle.
+	bool inTriangle(Vector3f point, Vector3f tri1, Vector3f tri2, Vector3f tri3);
 }
