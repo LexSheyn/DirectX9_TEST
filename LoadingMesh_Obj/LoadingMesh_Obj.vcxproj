@@ -179,6 +179,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\TEST\ObjReader.cpp" />
     <ClCompile Include="src\Tools\Loader.cpp" />
     <ClCompile Include="src\Tools\Tools.cpp" />
     <ClCompile Include="src\RenderObject\Components\VectorMath.cpp">
@@ -300,6 +301,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\RenderObject\Vertex\SVertex.h" />
+    <ClInclude Include="src\TEST\ObjReader.h" />
+    <ClInclude Include="src\TEST\Types.h" />
+    <ClInclude Include="src\TEST\VectorMacros.h" />
     <ClInclude Include="src\Tools\Loader.h" />
     <ClInclude Include="src\Tools\Tools.h" />
     <ClInclude Include="src\RenderObject\Components\VectorMath.h" />
