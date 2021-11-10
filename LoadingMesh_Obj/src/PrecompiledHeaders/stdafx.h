@@ -13,6 +13,13 @@ typedef unsigned short     uint16;
 typedef unsigned int       uint32;
 typedef unsigned long long uint64;
 
+typedef float              float32;
+typedef double             float64;
+
+// Constants
+#define pi_float32  3.141592f
+#define pi_float64 3.14159265358979323846
+
 // Windows 10 x32
 #include <windows.h>
 
@@ -24,6 +31,7 @@ typedef unsigned long long uint64;
 #include <thread>
 #include <chrono>
 #include <ctime>
+#include <math.h>
 
 // DirectX 9
 #include <d3d9.h>

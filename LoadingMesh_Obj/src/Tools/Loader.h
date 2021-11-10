@@ -45,15 +45,14 @@ namespace tool
 	// Private Functions:
 
 		// Generate vertices from a list of positions, tcoords, normals and a face line.
-		void GenerateVerticesFromRawOBJ(std::vector<gfx::Vertex>& oVerts,
+		void GenerateVerticesFromRawOBJ(std::vector<gfx::Vertex>& oVertices,
 			                      const std::vector<gfx::Vector3f>& iPositions,
-			                      const std::vector<gfx::Vector2f>& iTCoords,
+			                      const std::vector<gfx::Vector2f>& iTextureCoords,
 			                      const std::vector<gfx::Vector3f>& iNormals,
-			                            std::string icurline) {};
+			                            std::string iLine);
 
 		// Triangulate a list of vertices into a face by printing inducies corresponding with triangles within it.
-		void VertexTriangulation(std::vector<uint32>& oIndices,
-			               const std::vector<gfx::Vertex>& iVerts) {};
+		void VertexTriangulation(std::vector<uint32>& oIndices, const std::vector<gfx::Vertex>& iVertices);
 
 		// Load Materials from .mtl file
 		bool LoadMaterials(std::string path) {};

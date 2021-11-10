@@ -15,7 +15,7 @@ namespace gfx
 
 		Vector3f Normal;
 
-		Vector2f TextureCoordinate;
+		Vector2f TextureCoord;
 	};
 }
 

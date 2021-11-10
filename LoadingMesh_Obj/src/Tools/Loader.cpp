@@ -325,4 +325,262 @@ namespace tool
 
 		return true;
 	}
+
+
+// Private Functions:
+
+	void Loader::GenerateVerticesFromRawOBJ(std::vector<gfx::Vertex>& oVertices,
+		                              const std::vector<gfx::Vector3f>& iPositions, 
+		                              const std::vector<gfx::Vector2f>& iTextureCoords,
+		                              const std::vector<gfx::Vector3f>& iNormals, 
+		                                    std::string iLine)
+	{
+		std::vector<std::string> strFace;
+		std::vector<std::string> strVertex;
+		gfx::Vertex vertex;
+
+		Split(Tail(iLine), strFace, " ");
+
+		bool hasNormal = true;
+
+		// For every given vertex do this.
+		for (size_t i = 0; i < strFace.size(); i++)
+		{
+			// See what type the vertex is.
+			int32 vertexType = 0;
+
+			Split(strFace[i], strVertex, "/");
+			
+			// Check Vertex type.
+			if (strVertex.size() == 1)
+			{
+				// Check for just position - v1
+
+				// Only Position.
+				vertexType = 1;
+			}			
+			else if (strVertex.size() == 2)
+			{
+				// Check for position & texture - v1/vt1
+
+				// Position and Texture.
+				vertexType = 2;
+			}			
+			else if (strVertex.size() == 3)
+			{
+				// Check for Position, Texture and Normal - v1/vt1/vn1
+				// or if Position and Normal - v1/vn1
+
+				if (strVertex[1] != "")
+				{
+					// Position, Texture and Normal
+					vertexType = 4;
+				}
+				else
+				{
+					// Position and Normal
+					vertexType = 3;
+				}
+			}
+
+			// Calculate and store Vertex.
+			switch (vertexType)
+			{
+				// Position
+				case 1:
+				{
+					vertex.Position     = GetElement(iPositions, strVertex[0]);
+					vertex.TextureCoord = gfx::Vector2f(0.0f, 0.0f);
+
+					hasNormal = false;
+
+					oVertices.push_back(vertex);
+
+					break;
+				}
+
+				// Position, Texture
+				case 2:
+				{
+					vertex.Position     = GetElement(iPositions, strVertex[0]);
+					vertex.TextureCoord = GetElement(iTextureCoords, strVertex[1]);
+
+					hasNormal = false;
+
+					oVertices.push_back(vertex);
+
+					break;
+				}
+
+				// Position, Normal
+				case 3:
+				{
+					vertex.Position     = GetElement(iPositions, strVertex[0]);
+					vertex.TextureCoord = gfx::Vector2f(0.0f, 0.0f);
+					vertex.Normal       = GetElement(iNormals, strVertex[2]);
+
+					oVertices.push_back(vertex);
+
+					break;
+				}
+
+				// Position, Texture, Normal
+				case 4:
+				{
+					vertex.Position     = GetElement(iPositions, strVertex[0]);
+					vertex.TextureCoord = GetElement(iTextureCoords, strVertex[1]);
+					vertex.Normal       = GetElement(iNormals, strVertex[2]);
+
+					oVertices.push_back(vertex);
+
+					break;
+				}
+
+				default:
+				{
+					break;
+				}
+			}
+		}
+
+		// Take care of missing normals these may not be truly acurate but it is the 
+		// best they get for not compiling a mesh with normals.
+		if (hasNormal == false)
+		{
+			gfx::Vector3f A = oVertices[0].Position - oVertices[1].Position;
+			gfx::Vector3f B = oVertices[2].Position - oVertices[1].Position;
+
+			gfx::Vector3f normal = gfx::CrossProduct(A, B);
+
+			for (size_t i = 0; i < oVertices.size(); i++)
+			{
+				oVertices[i].Normal = normal;
+			}
+		}
+	}
+
+	void Loader::VertexTriangulation(std::vector<uint32>& oIndices, const std::vector<gfx::Vertex>& iVertices)
+	{
+		// If there are 2 or less vertices, no triangle can be created, so exit.
+		if (iVertices.size() < 3u)
+		{
+			return;
+		}
+		else if (iVertices.size() == 3u)
+		{
+			// If it is a triangle no need to calculate it.
+
+			oIndices.push_back(0);
+			oIndices.push_back(1);
+			oIndices.push_back(2);
+
+			return;
+		}
+
+		// Create a list of vertices.
+		std::vector<gfx::Vertex> tempVertices = iVertices;
+
+		while (true)
+		{
+			// For every vertex.
+			for (size_t i = 0u; i < tempVertices.size(); i++)
+			{
+				// Previous Vertex in the list.
+				gfx::Vertex vertexPrev;
+
+				if (i == 0u)
+				{
+					vertexPrev = tempVertices[tempVertices.size() - 1u];
+				}
+				else
+				{
+					vertexPrev = tempVertices[i = 1];
+				}
+
+				// Current Vertex in the list.
+				gfx::Vertex vertexCur = tempVertices[i];
+
+				// Next Vertex in the list.
+				gfx::Vertex vertexNext;
+
+				if (i == tempVertices.size() - 1u)
+				{
+					vertexNext = tempVertices[0];
+				}
+				else
+				{
+					vertexNext = tempVertices[i + 1u];
+				}
+
+				// Check to see if there are only 3 Vertices left, if so this is the last triangle.
+				if (tempVertices.size() == 3u)
+				{
+					// Create a triangle from vertexCur, vertexPrev, vertexNext.
+					for (size_t j = 0u; j < tempVertices.size(); j++)
+					{
+						if (iVertices[j].Position == vertexCur.Position)  { oIndices.push_back(j); }
+
+						if (iVertices[j].Position == vertexPrev.Position) { oIndices.push_back(j); }
+
+						if (iVertices[j].Position == vertexNext.Position) { oIndices.push_back(j); }
+					}
+
+					tempVertices.clear();
+					
+					// Break for loop.
+					break;
+				}
+				else if (tempVertices.size() == 4u)
+				{
+					// Create a triangle from vertexCur, vertexPrev, vertexNext.
+					for (size_t j = 0u; j < iVertices.size(); i++)
+					{
+						if (iVertices[j].Position == vertexCur.Position)  { oIndices.push_back(j); }
+
+						if (iVertices[j].Position == vertexPrev.Position) { oIndices.push_back(j); }
+
+						if (iVertices[j].Position == vertexNext.Position) { oIndices.push_back(j); }
+					}
+
+					gfx::Vector3f tempVector3f;
+
+					for (size_t j = 0u; j < tempVertices.size(); j++)
+					{
+						if (tempVertices[j].Position != vertexCur.Position &&
+							tempVertices[j].Position != vertexPrev.Position &&
+							tempVertices[j].Position != vertexNext.Position)
+						{
+							tempVector3f = tempVertices[j].Position;
+
+							break;
+						}
+					}
+
+					// Create a tirangle from vertexCurm vertexPrev, vertexNext.
+					for (size_t j = 0u; j < iVertices.size(); i++)
+					{
+						if (iVertices[j].Position == vertexPrev.Position) { oIndices.push_back(j); }
+
+						if (iVertices[j].Position == vertexNext.Position) { oIndices.push_back(j); }
+
+						if (iVertices[j].Position == tempVector3f)        { oIndices.push_back(j); }
+					}
+
+					tempVertices.clear();
+
+					// Break for loop.
+					break;
+				}
+
+				// If Vertex is not an interior Vertex.
+				float32 angle = gfx::AngleBetween(vertexPrev.Position - vertexCur.Position, vertexNext.Position - vertexCur.Position) * (180.0f / pi_float32);
+				if (angle <= 0.0f && angle >= 180.0f)
+				{
+					continue;
+				}
+
+				// 953
+			}
+		}
+	}
 }
