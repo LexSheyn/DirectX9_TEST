@@ -39,6 +39,24 @@ namespace tool
 
 		// Loaded Material Objects
 		std::vector<gfx::Material> LoadedMaterials;
+
+	private:
+
+	// Private Functions:
+
+		// Generate vertices from a list of positions, tcoords, normals and a face line.
+		void GenerateVerticesFromRawOBJ(std::vector<gfx::Vertex>& oVerts,
+			                      const std::vector<gfx::Vector3f>& iPositions,
+			                      const std::vector<gfx::Vector2f>& iTCoords,
+			                      const std::vector<gfx::Vector3f>& iNormals,
+			                            std::string icurline) {};
+
+		// Triangulate a list of vertices into a face by printing inducies corresponding with triangles within it.
+		void VertexTriangulation(std::vector<uint32>& oIndices,
+			               const std::vector<gfx::Vertex>& iVerts) {};
+
+		// Load Materials from .mtl file
+		bool LoadMaterials(std::string path) {};
 	};
 }
 

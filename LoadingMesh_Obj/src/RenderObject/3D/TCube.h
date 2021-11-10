@@ -1,8 +1,6 @@
 #ifndef TCUBE_H
 #define TCUBE_H
 
-#pragma once
-
 #include "../Transformable.h"
 
 namespace dx9

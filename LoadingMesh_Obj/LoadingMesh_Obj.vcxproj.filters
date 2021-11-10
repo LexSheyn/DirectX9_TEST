@@ -122,9 +122,6 @@
     <ClInclude Include="src\Application\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\RenderObject\Vertex\SVertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\RenderObject\Vertex\Color.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -180,6 +177,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Tools\Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderObject\Vertex\SVertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
