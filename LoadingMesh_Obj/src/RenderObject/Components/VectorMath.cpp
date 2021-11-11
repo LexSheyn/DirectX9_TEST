@@ -110,7 +110,7 @@ namespace gfx
 
 // In Triangle: 
 
-	bool inTriangle(Vector3f point, Vector3f tri1, Vector3f tri2, Vector3f tri3)
+	bool InTriangle(Vector3f point, Vector3f tri1, Vector3f tri2, Vector3f tri3)
 	{
 		// Test to see if it is within an infinite prism that the triangle outlines.
 		bool within_triangle_prism = SameSide(point, tri1, tri2, tri3) && SameSide(point, tri2, tri1, tri3) && SameSide(point, tri3, tri1, tri2);

@@ -55,7 +55,7 @@ namespace tool
 		void VertexTriangulation(std::vector<uint32>& oIndices, const std::vector<gfx::Vertex>& iVertices);
 
 		// Load Materials from .mtl file
-		bool LoadMaterials(std::string path) {};
+		bool LoadMaterials(std::string path);
 	};
 }
 

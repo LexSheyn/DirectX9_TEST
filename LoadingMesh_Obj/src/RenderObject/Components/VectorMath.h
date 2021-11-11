@@ -63,7 +63,7 @@ namespace gfx
 // In Triangle:
 
 	// Check to see if a Vector3 Point is within a 3 Vector3 Triangle.
-	bool inTriangle(Vector3f point, Vector3f tri1, Vector3f tri2, Vector3f tri3);
+	bool InTriangle(Vector3f point, Vector3f tri1, Vector3f tri2, Vector3f tri3);
 }
 
 #endif // VERTORMATH_H

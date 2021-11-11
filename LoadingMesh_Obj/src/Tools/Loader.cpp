@@ -483,7 +483,7 @@ namespace tool
 		while (true)
 		{
 			// For every vertex.
-			for (size_t i = 0u; i < tempVertices.size(); i++)
+			for (int32 i = 0; i < static_cast<int32>(tempVertices.size()); i++)
 			{
 				// Previous Vertex in the list.
 				gfx::Vertex vertexPrev;
@@ -576,11 +576,72 @@ namespace tool
 				float32 angle = gfx::AngleBetween(vertexPrev.Position - vertexCur.Position, vertexNext.Position - vertexCur.Position) * (180.0f / pi_float32);
 				if (angle <= 0.0f && angle >= 180.0f)
 				{
+					// Continue for loop.
 					continue;
 				}
 
-				// 953
+				// If any Vertices are within this triangle.
+				bool isInTriangle = false;
+
+				for (size_t j = 0u; j < iVertices.size(); j++)
+				{
+					if (gfx::InTriangle(iVertices[j].Position, vertexPrev.Position, vertexCur.Position, vertexNext.Position) &&
+						iVertices[j].Position != vertexPrev.Position &&
+						iVertices[j].Position != vertexCur.Position  &&
+						iVertices[j].Position != vertexNext.Position)
+					{
+						isInTriangle = true;
+
+						break;
+					}
+				}
+
+				if (isInTriangle)
+				{
+					// Continue for loop.
+					continue;
+				}
+
+				// Create a triangle from vertexCur, vertexPrev, vertexNext.
+				for (size_t j = 0u; j < iVertices.size(); j++)
+				{
+					if (iVertices[j].Position == vertexCur.Position)  { oIndices.push_back(j); }
+
+					if (iVertices[j].Position == vertexPrev.Position) { oIndices.push_back(j); }
+
+					if (iVertices[j].Position == vertexNext.Position) { oIndices.push_back(j); }
+				}
+
+				// Delete vertexCur from the list.
+				for (size_t j = 0u; j < iVertices.size(); j++)
+				{
+					if (tempVertices[j].Position == vertexCur.Position)
+					{
+						tempVertices.erase(tempVertices.begin() + j);
+
+						break;
+					}
+				}
+
+				// Reset i to the start -1 since loop will add 1 to it
+				i = -1;
+			}
+
+			// If no triangles were created.
+			if (oIndices.size() == 0u)
+			{
+				break;
+			}
+			else if (tempVertices.size() == 0u)
+			{
+				// If no more vertices
+				break;
 			}
 		}
+	}
+	
+	bool Loader::LoadMaterials(std::string path)
+	{
+		// 1006
 	}
 }
