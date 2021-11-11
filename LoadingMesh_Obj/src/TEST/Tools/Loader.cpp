@@ -1,4 +1,4 @@
-#include "../PrecompiledHeaders/stdafx.h"
+#include "../../PrecompiledHeaders/stdafx.h"
 #include "Loader.h"
 
 namespace tool
@@ -11,6 +11,7 @@ namespace tool
 
 	Loader::~Loader()
 	{
+		LoadedMeshes.clear();
 	}
 
 
@@ -53,29 +54,30 @@ namespace tool
 
 		gfx::Mesh tempMesh;
 
-#ifdef OBJLOADING_CONSOLE_OUTPUT
+		#ifdef OBJLOADING_CONSOLE_OUTPUT
 		const uint32 outputEveryNth = 1000;
 		uint32 outputIndicator = outputEveryNth;
-#endif
+		#endif
 
 		std::string line;
 
 		while (std::getline(inFile, line))
 		{
-#ifdef OBJLOADING_CONSOLE_OUTPUT
+			#ifdef OBJLOADING_CONSOLE_OUTPUT
 			if ((outputIndicator = ((outputIndicator + 1) % outputEveryNth)) == 1)
 			{
 				if (!meshName.empty())
 				{
-					std::cout << "\r- " << meshName
-						      << "\t| vertices: " << Positions.size()
-							  << "\t| texcoords: " << TCoords.size()
-						      << "\t| normals: " << Normals.size()
+					std::cout << "\r- "            << meshName
+						      << "\t| vertices: "  << Positions.size()
+							  << "\t| texcoords: " << TextureCoords.size()
+						      << "\t| normals: "   << Normals.size()
 							  << "\t| triangles: " << (Vertices.size() / 3)
 						      << (!MeshMaterialNames.empty() ? "\t| material: " + MeshMaterialNames.back() : "");
 				}
 			}
-#endif
+			#endif
+
 			// Generate a Mesh Object or prepare for an object to be created.
 			if (FirstToken(line) == "o" || FirstToken(line) == "g" || line[0] == 'g')
 			{
@@ -90,174 +92,158 @@ namespace tool
 					else
 					{
 						meshName = "unnamed";
-					}
-				}
-			}
-			else
-			{
-				// Generate a mesh to put into the array.
-				if (!Indices.empty() && !Vertices.empty())
-				{
-					// Create mesh.
-					tempMesh = gfx::Mesh(Vertices, Indices);
-					tempMesh.MeshName = meshName;
-
-					// Insert Mesh.
-					LoadedMeshes.push_back(tempMesh);
-
-					// Cleanup.
-					Vertices.clear();
-					Indices.clear();
-					meshName.clear();
-
-					meshName = Tail(line);
+					}				
 				}
 				else
 				{
-					if (FirstToken(line) == "o" || FirstToken(line) == "g")
+					// Generate a mesh to put into the array.
+					if (!Indices.empty() && !Vertices.empty())
 					{
+						// Create mesh.
+						tempMesh = gfx::Mesh(Vertices, Indices);
+						tempMesh.MeshName = meshName;
+
+						// Insert Mesh.
+						LoadedMeshes.push_back(tempMesh);
+
+						// Cleanup.
+						Vertices.clear();
+						Indices.clear();
+						meshName.clear();
+
 						meshName = Tail(line);
 					}
 					else
 					{
-						meshName = "unnamed";
-					}
-				}
-			}
-#ifdef OBJLOADING_CONSOLE_OUTPUT
-			std::cout << std::endl;
-			outputIndicator = 0;
-#endif
-		}
-
-		// Generate a Vertex Position.
-		if (FirstToken(line) == "v")
-		{
-			std::vector<std::string> positionString;
-			gfx::Vector3f positionVector;
-
-			Split(Tail(line), positionString, " ");
-
-			positionVector.x = std::stof(positionString[0]);
-			positionVector.y = std::stof(positionString[1]);
-			positionVector.z = std::stof(positionString[2]);
-
-			Positions.push_back(positionVector);
-		}
-
-		// Generate a Vertex Texture Coordinate.
-		if (FirstToken(line) == "vt")
-		{
-			std::vector<std::string> textureString;
-			gfx::Vector2f textureVector;
-
-			Split(Tail(line), textureString, " ");
-
-			textureVector.x = std::stof(textureString[0]);
-			textureVector.y = std::stof(textureString[1]);
-
-			TextureCoords.push_back(textureVector);
-		}
-
-		// Generate a Vertex Normal.
-		if (FirstToken(line) == "vn")
-		{
-			std::vector<std::string> normalString;
-			gfx::Vector3f normalVector;
-
-			Split(Tail(line), normalString, " ");
-
-			normalVector.x = std::stof(normalString[0]);
-			normalVector.y = std::stof(normalString[1]);
-			normalVector.z = std::stof(normalString[2]);
-
-			Normals.push_back(normalVector);
-		}
-
-		// Generate a face (vertices and indices).
-		if (FirstToken(line) == "f")
-		{
-			// Generate Vertex.
-			std::vector<gfx::Vertex> vertexVector;
-
-			GenerateVerticesFromRawOBJ(vertexVector, Positions, TextureCoords, Normals, line);
-
-			// Add vertices.
-			for (size_t i = 0; i < vertexVector.size(); i++)
-			{
-				Vertices.push_back(vertexVector[i]);
-
-				LoadedVertices.push_back(vertexVector[i]);
-			}
-			
-			std::vector<uint32> iIndices;
-
-			VertexTriangulation(iIndices, vertexVector);
-
-			// Add Indices.
-			for (size_t i = 0; i < iIndices.size(); i++)
-			{
-				uint32 indexNumber = static_cast<uint32>(Vertices.size() - vertexVector.size()) + iIndices[i];
-				Indices.push_back(indexNumber);
-
-				indexNumber = static_cast<uint32>(LoadedVertices.size() - vertexVector.size()) + iIndices[i];
-				LoadedIndices.push_back(indexNumber);
-			}
-		}
-
-		// Get Mesh Material Name.
-		if (FirstToken(line) == "usemtl")
-		{
-			MeshMaterialNames.push_back(Tail(line));
-
-			// Create new Mesh, if Material changes within group.
-			if (!Indices.empty() && !Vertices.empty())
-			{
-				// Create Mesh.
-				tempMesh = gfx::Mesh(Vertices, Indices);
-				tempMesh.MeshName = meshName;
-				
-				// 618
-				// Change mesh name if it already exists in a loop.
-				// isExixting = true to start first loop.
-				bool isExisting = true;
-				
-				for (uint32 i = 0; isExisting == true; i++)
-				{
-					tempMesh.MeshName = meshName + "_" + std::to_string(i);
-
-					for (auto& mesh : LoadedMeshes)
-					{
-						if (mesh.MeshName == tempMesh.MeshName)
+						if (FirstToken(line) == "o" || FirstToken(line) == "g")
 						{
-							isExisting = true;
-							break;
+							meshName = Tail(line);
 						}
 						else
 						{
-							isExisting = false;
+							meshName = "unnamed";
 						}
 					}
 				}
-
-				// Insert Mesh.
-				LoadedMeshes.push_back(tempMesh);
-
-				// Cleanup.
-				Vertices.clear();
-				Indices.clear();
+				#ifdef OBJLOADING_CONSOLE_OUTPUT
+				std::cout << std::endl;
+				outputIndicator = 0;
+				#endif
 			}
 
-#ifdef OBJLOADING_CONSOLE_OUTPUT
-			outputIndicator = 0;
-#endif
-
-			// Load Materials.
-			if (FirstToken(line) == "mtllib")
+			// Generate a Vertex Position.
+			if (FirstToken(line) == "v")
 			{
-				// Generate LoadedMaterial.
-				//
+				std::vector<std::string> positionString;
+				gfx::Vector3f positionVector;
 
+				Split(Tail(line), positionString, " ");
+
+				positionVector.x = std::stof(positionString[0]);
+				positionVector.y = std::stof(positionString[1]);
+				positionVector.z = std::stof(positionString[2]);
+
+				Positions.push_back(positionVector);
+			}		
+			else if (FirstToken(line) == "vt")
+			{
+				// Generate a Vertex Texture Coordinate.
+
+				std::vector<std::string> textureString;
+				gfx::Vector2f textureVector;
+
+				Split(Tail(line), textureString, " ");
+
+				textureVector.x = std::stof(textureString[0]);
+				textureVector.y = std::stof(textureString[1]);
+
+				TextureCoords.push_back(textureVector);
+			}		
+			else if (FirstToken(line) == "vn")
+			{
+				// Generate a Vertex Normal.
+
+				std::vector<std::string> normalString;
+				gfx::Vector3f normalVector;
+
+				Split(Tail(line), normalString, " ");
+
+				normalVector.x = std::stof(normalString[0]);
+				normalVector.y = std::stof(normalString[1]);
+				normalVector.z = std::stof(normalString[2]);
+
+				Normals.push_back(normalVector);
+			}		
+			else if (FirstToken(line) == "f")
+			{
+				// Generate a face (vertices and indices).
+
+				// Generate Vertex.
+				std::vector<gfx::Vertex> vertexVector;
+
+				GenerateVerticesFromRawOBJ(vertexVector, Positions, TextureCoords, Normals, line);
+
+				// Add vertices.
+				for (size_t i = 0; i < vertexVector.size(); i++)
+				{
+					Vertices.push_back(vertexVector[i]);
+
+					LoadedVertices.push_back(vertexVector[i]);
+				}
+				
+				std::vector<uint32> iIndices;
+
+				VertexTriangulation(iIndices, vertexVector);
+
+				// Add Indices.
+				for (size_t i = 0; i < iIndices.size(); i++)
+				{
+					uint32 indexNumber = static_cast<uint32>(Vertices.size() - vertexVector.size()) + iIndices[i];
+					Indices.push_back(indexNumber);
+
+					indexNumber = static_cast<uint32>(LoadedVertices.size() - vertexVector.size()) + iIndices[i];
+					LoadedIndices.push_back(indexNumber);
+				}
+			}		
+			else if (FirstToken(line) == "usemtl")
+			{
+				// Get Mesh Material Name.
+				MeshMaterialNames.push_back(Tail(line));
+
+				// Create new Mesh, if Material changes within group.
+				if (!Indices.empty() && !Vertices.empty())
+				{
+					// Create Mesh.
+					tempMesh = gfx::Mesh(Vertices, Indices);
+					tempMesh.MeshName = meshName;
+					int32 i = 2;
+					while (1) {
+						tempMesh.MeshName = meshName + "_" + std::to_string(i);
+
+						for (auto& m : LoadedMeshes)
+							if (m.MeshName == tempMesh.MeshName)
+								continue;
+						break;
+					}
+
+					// Insert Mesh
+					LoadedMeshes.push_back(tempMesh);
+
+					// Cleanup
+					Vertices.clear();
+					Indices.clear();
+				}					
+
+				#ifdef OBJLOADING_CONSOLE_OUTPUT
+				outputIndicator = 0;
+				#endif
+			}			
+			else if (FirstToken(line) == "mtllib")
+			{
+				// Load Materials.-
+
+				// Generate LoadedMaterial.
+				
 				// Generate a path to the material file.
 				std::vector<std::string> temp;
 
@@ -265,7 +251,7 @@ namespace tool
 				
 				std::string pathToMaterials = "";
 
-				if (temp.size() != 1)
+				if (temp.size() != 1u)
 				{
 					for (size_t i = 0; i < temp.size(); i++)
 					{
@@ -275,20 +261,20 @@ namespace tool
 
 				pathToMaterials += Tail(line);
 
-#ifdef OBJLOADING_CONSOLE_OUTPUT
-			std::cout << std::endl << "- find materials in: " << pathToMaterials << std::endl;
-#endif
+				#ifdef OBJLOADING_CONSOLE_OUTPUT
+				std::cout << std::endl << "- find materials in: " << pathToMaterials << std::endl;
+				#endif
 
 				// Load Materials.
 				LoadMaterials(pathToMaterials);
 			}
 		}
 
-#ifdef OBJLOADING_CONSOLE_OUTPUT
-	std::cout << std::endl;
-#endif
+		#ifdef OBJLOADING_CONSOLE_OUTPUT
+		std::cout << std::endl;
+		#endif
 
-		// Deal with last mesh.		
+		// Deal with last mesh.
 		if (!Indices.empty() && !Vertices.empty())
 		{
 			// Create Mesh.
@@ -322,8 +308,10 @@ namespace tool
 		{
 			return false;
 		}
-
-		return true;
+		else
+		{
+			return true;
+		}
 	}
 
 
@@ -352,21 +340,21 @@ namespace tool
 			Split(strFace[i], strVertex, "/");
 			
 			// Check Vertex type.
-			if (strVertex.size() == 1)
+			if (strVertex.size() == 1u)
 			{
 				// Check for just position - v1
 
 				// Only Position.
 				vertexType = 1;
 			}			
-			else if (strVertex.size() == 2)
+			else if (strVertex.size() == 2u)
 			{
 				// Check for position & texture - v1/vt1
 
 				// Position and Texture.
 				vertexType = 2;
 			}			
-			else if (strVertex.size() == 3)
+			else if (strVertex.size() == 3u)
 			{
 				// Check for Position, Texture and Normal - v1/vt1/vn1
 				// or if Position and Normal - v1/vn1
@@ -445,7 +433,7 @@ namespace tool
 
 		// Take care of missing normals these may not be truly acurate but it is the 
 		// best they get for not compiling a mesh with normals.
-		if (hasNormal == false)
+		if (!hasNormal)
 		{
 			gfx::Vector3f A = oVertices[0].Position - oVertices[1].Position;
 			gfx::Vector3f B = oVertices[2].Position - oVertices[1].Position;
@@ -488,7 +476,7 @@ namespace tool
 				// Previous Vertex in the list.
 				gfx::Vertex vertexPrev;
 
-				if (i == 0u)
+				if (i == 0)
 				{
 					vertexPrev = tempVertices[tempVertices.size() - 1u];
 				}
@@ -503,13 +491,13 @@ namespace tool
 				// Next Vertex in the list.
 				gfx::Vertex vertexNext;
 
-				if (i == tempVertices.size() - 1u)
+				if (i == static_cast<int32>(tempVertices.size()) - 1)
 				{
 					vertexNext = tempVertices[0];
 				}
 				else
 				{
-					vertexNext = tempVertices[i + 1u];
+					vertexNext = tempVertices[i + 1];
 				}
 
 				// Check to see if there are only 3 Vertices left, if so this is the last triangle.
@@ -546,7 +534,7 @@ namespace tool
 
 					for (size_t j = 0u; j < tempVertices.size(); j++)
 					{
-						if (tempVertices[j].Position != vertexCur.Position &&
+						if (tempVertices[j].Position != vertexCur.Position  &&
 							tempVertices[j].Position != vertexPrev.Position &&
 							tempVertices[j].Position != vertexNext.Position)
 						{
@@ -640,8 +628,183 @@ namespace tool
 		}
 	}
 	
-	bool Loader::LoadMaterials(std::string path)
+	bool Loader::LoadMaterials(std::string filePath)
 	{
-		// 1006
+		// If the file is not a material file return false.
+		if (filePath.substr(filePath.size() - 4u, filePath.size()) != ".mtl")
+		{
+			return false;
+		}
+
+		std::ifstream inFile;
+
+		inFile.open(filePath);
+
+		// If the file is not found return false.
+		if (!inFile.is_open())
+		{
+			return false;
+		}
+
+		gfx::Material tempMaterial;
+
+		bool isListening = false;
+
+		// Go through each line looking for Material variables.
+		std::string line;
+
+		while (std::getline(inFile, line))
+		{
+			// New Material and Material name.
+			if (FirstToken(line) == "newmtl")
+			{
+				if (!isListening)
+				{
+					isListening = true;
+
+					if (line.size() > 7u)
+					{
+						tempMaterial.Name = Tail(line);
+					}
+					else
+					{
+						tempMaterial.Name = "none";
+					}
+				}
+				else
+				{
+					// Generate Material.
+					
+					// Push back loaded Material.
+					LoadedMaterials.push_back(tempMaterial);
+
+					// Clear loaded Material.
+					tempMaterial = gfx::Material();
+
+					if (line.size() > 7u)
+					{
+						tempMaterial.Name = Tail(line);
+					}
+					else
+					{
+						tempMaterial.Name = "none";
+					}
+				}
+			}
+
+			// Ambient Color.
+			if (FirstToken(line) == "Ka")
+			{
+				std::vector<std::string> temp;
+
+				Split(Tail(line), temp, " ");
+
+				if (temp.size() != 3u)
+				{
+					continue;
+				}
+
+				tempMaterial.Ka.x = std::stof(temp[0]);
+				tempMaterial.Ka.y = std::stof(temp[1]);
+				tempMaterial.Ka.z = std::stof(temp[2]);
+			}
+			else if (FirstToken(line) == "Kd")
+			{
+				// Diffuse Color.
+				std::vector<std::string> temp;
+
+				Split(Tail(line), temp, " ");
+
+				if (temp.size() != 3u)
+				{
+					continue;
+				}
+
+				tempMaterial.Kd.x = std::stof(temp[0]);
+				tempMaterial.Kd.y = std::stof(temp[1]);
+				tempMaterial.Kd.z = std::stof(temp[2]);
+			}
+			else if (FirstToken(line) == "Ks")
+			{
+				// Specular Color.
+				std::vector<std::string> temp;
+
+				Split(Tail(line), temp, " ");
+
+				if (temp.size() != 3u)
+				{
+					continue;
+				}
+
+				tempMaterial.Ks.x = std::stof(temp[0]);
+				tempMaterial.Ks.y = std::stof(temp[1]);
+				tempMaterial.Ks.z = std::stof(temp[2]);
+			}
+			else if (FirstToken(line) == "Ns")
+			{
+				// Specular Exponent.
+				tempMaterial.Ns = std::stof(Tail(line));
+			}
+			else if (FirstToken(line) == "Ni")
+			{
+				// Optical Dencity.
+				tempMaterial.Ni = std::stof(Tail(line));
+			}
+			else if (FirstToken(line) == "d")
+			{
+				// Dissolve.
+				tempMaterial.d = std::stof(Tail(line));
+			}
+			else if (FirstToken(line) == "illum")
+			{
+				// Illumination.
+				tempMaterial.illum = std::stoi(Tail(line));
+			}
+			else if (FirstToken(line) == "map_Ka")
+			{
+				// Ambient Texture Map.
+				tempMaterial.map_Ka = Tail(line);
+			}
+			else if (FirstToken(line) == "map_Kd")
+			{
+				// Diffuse Texture Map.
+				tempMaterial.map_Kd = Tail(line);
+			}
+			else if (FirstToken(line) == "map_Ks")
+			{
+				// Specular Texture Map.
+				tempMaterial.map_Ks = Tail(line);
+			}
+			else if (FirstToken(line) == "map_Ns")
+			{
+				// Specular Highlight Map.
+				tempMaterial.map_Ns = Tail(line);
+			}
+			else if (FirstToken(line)  == "map_d")
+			{
+				// Alpha Texture Map.
+				tempMaterial.map_d = Tail(line);
+			}
+			else if (FirstToken(line) == "map_Bump" || FirstToken(line) == "map_bump" || FirstToken(line) == "bump")
+			{
+				// Bump Map.
+				tempMaterial.map_bump = Tail(line);
+			}
+		}
+
+		// Deal with the last Material.
+
+		// Push back loaded Material.
+		LoadedMaterials.push_back(tempMaterial);
+
+		// Test to see if anything was loaded, if not - return false.
+		if (LoadedMaterials.empty())
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}		
 	}
 }

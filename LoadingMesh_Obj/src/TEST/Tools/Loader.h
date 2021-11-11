@@ -3,9 +3,9 @@
 
 #include "Tools.h"
 
-#include "../RenderObject/Components/Mesh.h"
-#include "../RenderObject/Components/Vertex.h"
-#include "../RenderObject/Components/Material.h"
+#include "../Components/Mesh.h"
+
+#define OBJLOADING_CONSOLE_OUTPUT
 
 namespace tool
 {
@@ -54,8 +54,10 @@ namespace tool
 		// Triangulate a list of vertices into a face by printing inducies corresponding with triangles within it.
 		void VertexTriangulation(std::vector<uint32>& oIndices, const std::vector<gfx::Vertex>& iVertices);
 
-		// Load Materials from .mtl file
-		bool LoadMaterials(std::string path);
+		// Load Materials from .mtl file.
+		// If the file is not a material file return false.
+		// If the file is not found return false.
+		bool LoadMaterials(std::string filePath);
 	};
 }
 

@@ -1,4 +1,4 @@
-#include "../PrecompiledHeaders/stdafx.h"
+#include "../../PrecompiledHeaders/stdafx.h"
 #include "Tools.h"
 
 namespace tool
@@ -11,7 +11,7 @@ namespace tool
 
 		std::string temp;
 
-		for (int i = 0; i < int(in.size()); i++)
+		for (size_t i = 0; i < in.size(); i++)
 		{
 			std::string test = in.substr(i, token.size());
 
@@ -21,7 +21,7 @@ namespace tool
 				{
 					out.push_back(temp);
 					temp.clear();
-					i += (int)token.size() - 1;
+					i += token.size() - 1u;
 				}
 				else
 				{
@@ -47,9 +47,9 @@ namespace tool
 	std::string Tail(const std::string& in)
 	{
 		size_t token_start = in.find_first_not_of(" \t");
-		size_t space_start = in.find_first_of(" \t", token_start);
+		size_t space_start = in.find_first_of(    " \t", token_start);
 		size_t tail_start  = in.find_first_not_of(" \t", space_start);
-		size_t tail_end    = in.find_last_not_of(" \t");
+		size_t tail_end    = in.find_last_not_of( " \t");
 
 		if (tail_start != std::string::npos && tail_end != std::string::npos)
 		{
@@ -71,7 +71,7 @@ namespace tool
 		if (!in.empty())
 		{
 			size_t token_start = in.find_first_not_of(" \t");
-			size_t token_end   = in.find_first_of(" \t", token_start);
+			size_t token_end   = in.find_first_of(    " \t", token_start);
 
 			if (token_start != std::string::npos && token_end != std::string::npos)
 			{

@@ -7,13 +7,10 @@ namespace gfx
 
 	Material::Material()
 	{
-		NSpecular = 0.0f;
-
-		NDencity  = 0.0f;
-
-		Dissolve  = 0.0f;
-
-		Illumination = 0;
+		Ns    = 0.0f;
+		Ni    = 0.0f;
+		d     = 0.0f;
+		illum = 0;
 	}
 
 }

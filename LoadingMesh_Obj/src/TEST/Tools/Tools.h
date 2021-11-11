@@ -23,22 +23,22 @@ namespace tool
 
 // Get Element:
 
-	template <class T>
-
 	// Get element at given index position.
+	template <class T>	
 	const T& GetElement(const std::vector<T>& elements, std::string& _index)
 	{
 		int32 index = std::stoi(_index);
 
 		if (index < 0)
 		{
-			index = int32(elements.size()) + index;
+			index = static_cast<int32>(elements.size()) + index;
 		}
 		else
 		{
-			index--;
-			return elements[index];
+			index--;			
 		}
+
+		return elements[index];
 	}
 }
 
