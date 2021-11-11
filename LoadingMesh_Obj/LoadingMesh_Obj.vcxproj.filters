@@ -105,6 +105,9 @@
     <ClCompile Include="src\TEST\Example\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\TEST\LoaderTest\LoaderTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PrecompiledHeaders\stdafx.h">
@@ -189,6 +192,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\TEST\Original\OBJ_Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TEST\LoaderTest\LoaderTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

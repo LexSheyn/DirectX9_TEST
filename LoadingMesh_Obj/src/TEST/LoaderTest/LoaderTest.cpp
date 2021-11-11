@@ -57,6 +57,10 @@ namespace test
 			{
 				if (line[0] == 'o' || line[0] == 'g')
 				{
+					meshName = Tail(line);
+				}
+				else if (line[0] == 'v') // OBJ_Loader.h: 541
+				{
 
 				}
 			}
@@ -70,18 +74,34 @@ namespace test
 
 	std::string LoaderTest::FirstToken(std::string& str)
 	{
-		return std::string();
+		if (!str.empty())
+		{
+			uint32 token_start = str.find_first_not_of(" \t");
+
+			uint32 token_end   = str.find_first_of(" \t", token_start);
+
+			if (token_start != std::string::npos && token_end != std::string::npos)
+			{
+				return str.substr(token_start, token_end - token_start);
+			}
+			else if (token_start != std::string::npos)
+			{
+				return str.substr(token_start);
+			}
+		}
+
+		return "";
 	}
 
 	std::string LoaderTest::Tail(const std::string& str)
 	{
-		size_t token_start = str.find_first_not_of(" \t");
+		uint32 token_start = str.find_first_not_of(" \t");
 		
-		size_t space_start = str.find_first_of(" \t", token_start);
+		uint32 space_start = str.find_first_of(" \t", token_start);
 
-		size_t tail_start  = str.find_first_not_of(" \t", space_start);
+		uint32 tail_start  = str.find_first_not_of(" \t", space_start);
 
-		size_t tail_end    = str.find_last_not_of(" \t");
+		uint32 tail_end    = str.find_last_not_of(" \t");
 
 		if (tail_start != std::string::npos && tail_end != std::string::npos)
 		{
