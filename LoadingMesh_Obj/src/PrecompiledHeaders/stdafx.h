@@ -17,8 +17,8 @@ typedef float              float32;
 typedef double             float64;
 
 // Constants
-#define pi_float32  3.141592f
-#define pi_float64 3.14159265358979323846
+#define Pi_float32 3.141592f
+#define Pi_float64 3.14159265358979323846
 
 // Windows 10 x32
 #include <windows.h>

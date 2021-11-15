@@ -93,22 +93,13 @@
     <ClCompile Include="src\TEST\Components\VectorMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TEST\Tools\Tools.cpp">
+    <ClCompile Include="src\TEST\EntryPoint\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TEST\Tools\Loader.cpp">
+    <ClCompile Include="src\TEST\Loader\Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TEST\Original\e1_loadandprint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TEST\Example\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TEST\LoaderTest\LoaderTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TEST\LoaderTest\Parser.cpp">
+    <ClCompile Include="src\TEST\Loader\Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -185,22 +176,13 @@
     <ClInclude Include="src\TEST\Components\VectorMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TEST\Tools\Tools.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TEST\Tools\Loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\RenderObject\Vertex\SVertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TEST\Original\OBJ_Loader.h">
+    <ClInclude Include="src\TEST\Loader\Loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TEST\LoaderTest\LoaderTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TEST\LoaderTest\Parser.h">
+    <ClInclude Include="src\TEST\Loader\Parser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

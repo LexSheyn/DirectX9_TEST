@@ -6,13 +6,13 @@
 #include "../../PrecompiledHeaders/stdafx.h"
 
 // OBJ_Loader - .obj Loader
-#include "../Tools/Loader.h"
+#include "../Loader/Loader.h"
 
 // Main function
 int32 main(int32 argc, char8* argv[])
 {
 	// Initialize Loader
-	tool::Loader Loader;
+	test::Loader Loader;
 
 	// Load .obj File
 	bool loadout = Loader.LoadObj("C:/Users/Admin/Desktop/box_stack.obj");
@@ -23,13 +23,13 @@ int32 main(int32 argc, char8* argv[])
 	if (loadout)
 	{
 		// Create/Open e1Out.txt
-		std::ofstream file("e1Out.txt");
+		std::ofstream file("LoadingLog.txt");
 
 		// Go through each loaded mesh and out its contents
-		for (size_t i = 0; i < Loader.LoadedMeshes.size(); i++)
+		for (size_t i = 0; i < Loader.GetLoadedMeshes().size(); i++)
 		{
 			// Copy one of the loaded meshes to be our current mesh
-			gfx::Mesh curMesh = Loader.LoadedMeshes[i];
+			gfx::Mesh curMesh = Loader.GetLoadedMeshes()[i];
 
 			// Print Mesh Name
 			file << "Mesh " << i << ": " << curMesh.MeshName << "\n";
@@ -83,7 +83,7 @@ int32 main(int32 argc, char8* argv[])
 	else
 	{
 		// Create/Open e1Out.txt
-		std::ofstream file("e1Out.txt");
+		std::ofstream file("LoadingLog.txt");
 
 		// Output Error
 		file << "Failed to Load File. May have failed to find it or it was not an .obj file.\n";

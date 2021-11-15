@@ -7,19 +7,29 @@
 
 namespace test
 {
-	class LoaderTest
+	class Loader
 	{
 	public:
 
 	// Constructors and Destructor:
 
-		LoaderTest();
+		Loader();
 
-		~LoaderTest();
+		~Loader();
 
 	// Functions:
 
 		bool LoadObj(const std::string& filePath);
+
+	// Accessors:
+
+		std::vector<gfx::Mesh>& GetLoadedMeshes();
+
+		std::vector<gfx::Vertex>& GetLoadedVertices();
+
+		std::vector<uint32>& GetLoadedIndices();
+
+		std::vector<gfx::Material>& GetLoadedMaterials();
 
 	private:
 
