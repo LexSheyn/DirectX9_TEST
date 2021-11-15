@@ -16,6 +16,9 @@ namespace gfx
 		Vector3f Normal;
 
 		Vector2f TextureCoord;
+
+		// TEST
+		static const DWORD FVF = D3DFVF_XYZ | D3DFVF_TEX1;
 	};
 }
 

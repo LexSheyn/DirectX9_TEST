@@ -114,6 +114,28 @@ namespace dx9
 		return true;
 	}
 
+	bool GraphicDevice::CreateVertexBuffer(gfx::Mesh* mesh)
+	{
+		// TEST
+
+		m_VerticesCount = mesh->Vertices.size();
+
+		void* pVertices;
+
+		m_Device->CreateVertexBuffer(m_VerticesCount * sizeof(gfx::Vertex), 0, gfx::Vertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
+
+		gfx::Vertex* vertex_array = new gfx::Vertex[mesh->Vertices.size()];
+
+		for (uint32 i = 0u; i < static_cast<uint32>(mesh->Vertices.size()); i++)
+		{
+			vertex_array[i] = mesh->Vertices[i]; // ???
+		}
+
+		// Creating a vertex array from vertex vector...
+
+		return true;
+	}
+
 	bool GraphicDevice::CreateIndexBuffer(TCube* cube)
 	{
 		m_IndicesCount    = cube->IndicesNumber;
@@ -129,6 +151,11 @@ namespace dx9
 
 		m_IndexBuffer->Unlock();
 
+		return true;
+	}
+
+	bool GraphicDevice::CreateIndexBuffer(gfx::Mesh* mesh)
+	{
 		return true;
 	}
 

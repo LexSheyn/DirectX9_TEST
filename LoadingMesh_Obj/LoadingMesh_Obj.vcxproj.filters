@@ -102,6 +102,9 @@
     <ClCompile Include="src\TEST\Loader\Parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\TEST\Components\MeshTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PrecompiledHeaders\stdafx.h">
@@ -183,6 +186,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\TEST\Loader\Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TEST\Components\MeshTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

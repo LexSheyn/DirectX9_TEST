@@ -4,6 +4,7 @@
 #include "../RenderObject/2D/RectangleShape.h"
 #include "../RenderObject/3D/SCube.h"
 #include "../RenderObject/3D/TCube.h"
+#include "../TEST/Components/Mesh.h"
 
 namespace dx9
 {
@@ -23,8 +24,10 @@ namespace dx9
 
 		// REPLACE TriangleShape by Shape, AND ALSO REWORK Shape AND HERITOR CLASSES
 		bool CreateVertexBuffer(TCube* cube);
+		bool CreateVertexBuffer(gfx::Mesh* mesh);
 
 		bool CreateIndexBuffer(TCube* cube);
+		bool CreateIndexBuffer(gfx::Mesh* mesh);		
 
 		void InvalidateDevice();
 

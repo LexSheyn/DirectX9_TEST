@@ -179,6 +179,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\TEST\Components\MeshTest.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\TEST\EntryPoint\Main.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
@@ -316,6 +322,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\RenderObject\Vertex\SVertex.h" />
+    <ClInclude Include="src\TEST\Components\MeshTest.h" />
     <ClInclude Include="src\TEST\Loader\Loader.h" />
     <ClInclude Include="src\TEST\Loader\Parser.h" />
     <ClInclude Include="src\TEST\Components\VectorMath.h" />
