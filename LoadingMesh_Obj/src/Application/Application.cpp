@@ -19,6 +19,8 @@ Application::Application()
 			 
 	m_Height = static_cast<int32>(desktop.bottom) / 2;
 
+	m_Message = { 0 };
+
 	// Time.
 	m_TimeBegin = 0;
 	m_TimeEnd   = 0;

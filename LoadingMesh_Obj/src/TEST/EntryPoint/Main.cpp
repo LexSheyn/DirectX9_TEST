@@ -7,7 +7,7 @@
 
 // OBJ_Loader - .obj Loader
 #include "../Loader/Loader.h"
-
+/*
 // Main function
 int32 main(int32 argc, char8* argv[])
 {
@@ -15,12 +15,12 @@ int32 main(int32 argc, char8* argv[])
 	test::Loader Loader;
 
 	// Load .obj File
-	bool loadout = Loader.LoadObj("C:/Users/Admin/Desktop/box_stack.obj");
+	bool hasLoaded = Loader.LoadObj("C:/Users/Admin/Desktop/tttt.obj");
 
 	// Check to see if it loaded
 
 	// If so continue
-	if (loadout)
+	if (hasLoaded)
 	{
 		// Create/Open e1Out.txt
 		std::ofstream file("LoadingLog.txt");
@@ -95,3 +95,4 @@ int32 main(int32 argc, char8* argv[])
 	// Exit the program
 	return 0;
 }
+*/

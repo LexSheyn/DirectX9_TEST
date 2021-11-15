@@ -131,13 +131,7 @@ namespace test
 					vertex_normal.z = std::stof(vertex_normal_str[2]);
 
 					Normals.push_back(vertex_normal);
-				}
-				else if (str::Parser::FirstToken(line) == "usemtl")
-				{
-					// Get Mesh Material name.
-
-					MaterialNames.push_back(str::Parser::Tail(line));
-				}
+				}				
 				else if (str::Parser::FirstToken(line) == "f")
 				{
 					// Generate a face (Vertices and Indices).
@@ -171,6 +165,51 @@ namespace test
 					}
 
 				}
+				else if (str::Parser::FirstToken(line) == "usemtl")
+				{
+					// Get Mesh Material name.
+
+					MaterialNames.push_back(str::Parser::Tail(line));
+// TEST -- Begin
+					// Create new Mesh, if Material changes within a group
+					if (!Vertices.empty() && !Indices.empty())
+					{
+						// Create Mesh
+						tempMesh = gfx::Mesh(Vertices, Indices);
+
+						tempMesh.MeshName = meshName;
+						
+						// TEST
+						bool isExisting = false;
+
+						for (uint32 i = 0u; isExisting; i++)
+						{
+							tempMesh.MeshName = meshName + "_" + std::to_string(i);
+
+							for (auto& mesh : m_LoadedMeshes)
+							{
+								if (mesh.MeshName == tempMesh.MeshName)
+								{
+									isExisting = true;
+
+									break;
+								}
+								else
+								{
+									isExisting = false;
+								}
+							}							
+						}
+
+						// Insert Mesh
+						m_LoadedMeshes.push_back(tempMesh);
+
+						// Cleanup
+						Vertices.clear();
+						Indices.clear();
+					}
+// TEST -- End
+				}
 				else if (str::Parser::FirstToken(line) == "mtllib")
 				{
 					// Generate a path to the Material file and load Material.
@@ -197,7 +236,7 @@ namespace test
 
 			// Deal with last mesh.
 
-			if (!Indices.empty() && !Vertices.empty())
+			if (!Vertices.empty() && !Indices.empty())
 			{
 				// Create Mesh.
 
@@ -214,22 +253,22 @@ namespace test
 
 		// Set Materials for each Mesh.
 
-		for (size_t i = 0; i < MaterialNames.size(); i++)
+		for (size_t i = 0u; i < MaterialNames.size(); i++)
 		{
-			std::string matname = MaterialNames[i];
+			std::string material_name = MaterialNames[i];
 
 			// Find corresponding material name in loaded materials
 			// when found copy material variables into mesh material.
 
-			for (size_t j = 0; j < m_LoadedMaterials.size(); j++)
+			for (size_t k = 0u; k < m_LoadedMaterials.size(); k++)
 			{
-				if (m_LoadedMaterials[j].Name == matname)
+				if (m_LoadedMaterials[k].Name == material_name)
 				{
-					m_LoadedMeshes[i].MeshMaterial = m_LoadedMaterials[j];
-					
+					m_LoadedMeshes[i].MeshMaterial = m_LoadedMaterials[k];
+
 					break;
 				}
-			}
+			}		
 		}
 
 		if (m_LoadedMeshes.empty() && m_LoadedVertices.empty() && m_LoadedIndices.empty())
@@ -730,37 +769,37 @@ namespace test
 				{
 					// Ambient Texture Map.
 
-					tempMaterial.map_Ka = std::stof(str::Parser::Tail(line));
+					tempMaterial.map_Ka = str::Parser::Tail(line);
 				}
 				else if (str::Parser::FirstToken(line) == "map_Kd")
 				{
 					// Diffuse Texture Map.
 
-					tempMaterial.map_Kd = std::stof(str::Parser::Tail(line));
+					tempMaterial.map_Kd = str::Parser::Tail(line);
 				}				
 				else if (str::Parser::FirstToken(line) == "map_Ks")
 				{
 					// Specular Texture Map.
 
-					tempMaterial.map_Ks = std::stof(str::Parser::Tail(line));
+					tempMaterial.map_Ks = str::Parser::Tail(line);
 				}				
 				else if (str::Parser::FirstToken(line) == "map_Ns")
 				{
 					// Specular Hightlight Map.
 
-					tempMaterial.map_Ns = std::stof(str::Parser::Tail(line));
+					tempMaterial.map_Ns = str::Parser::Tail(line);
 				}				
 				else if (str::Parser::FirstToken(line) == "map_d")
 				{
 					// Alpha Texture Map.
 
-					tempMaterial.map_d = std::stof(str::Parser::Tail(line));
+					tempMaterial.map_d = str::Parser::Tail(line);
 				}				
 				else if (str::Parser::FirstToken(line) == "map_Bump" || str::Parser::FirstToken(line) == "map_bump" || str::Parser::FirstToken(line) == "bump")
 				{
 					// Bump Map.
 
-					tempMaterial.map_bump = std::stof(str::Parser::Tail(line));
+					tempMaterial.map_bump = str::Parser::Tail(line);
 				}
 			}
 
