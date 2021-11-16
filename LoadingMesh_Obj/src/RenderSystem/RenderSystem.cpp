@@ -41,7 +41,7 @@ namespace dx9
 		m_Camera.SetPosition(position, target, up);
 	}
 
-	void RenderSystem::Render(const float& dt)
+	void RenderSystem::Render(TNCube* cube, const float& dt)
 	{
 		m_GraphicDevice.Clear(Color::Black);
 
@@ -49,7 +49,7 @@ namespace dx9
 		m_Camera.Rotate_Y(1.0f, dt);
 		m_Camera.Rotate_Z(1.0f, dt);
 
-		m_GraphicDevice.Begin();
+		m_GraphicDevice.Begin(cube);
 		m_GraphicDevice.End();
 		m_GraphicDevice.Present();
 	}

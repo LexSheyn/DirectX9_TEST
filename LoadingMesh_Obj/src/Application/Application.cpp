@@ -37,6 +37,11 @@ Application::~Application()
 
 bool Application::Initialize(HINSTANCE hInstance, int32 nCmdShow)
 {
+	//0. Load Mesh.
+//	m_Loader.LoadObj("C:/Users/Admin/Desktop/ttt2/tttt.obj");
+
+//	m_Mesh = m_Loader.GetLoadedMeshes()[1];
+
 	// 1. Create Window.
 	m_Window.GenerateWindow(hInstance, nCmdShow, "Win32Window", "D3DX9 Win32 Window", m_Width, m_Height, m_hWnd);
 
@@ -44,13 +49,15 @@ bool Application::Initialize(HINSTANCE hInstance, int32 nCmdShow)
 	m_RenderSystem.Initialize(m_hWnd, m_Width, m_Height, true);	
 
 	// 3. Create vertex buffer for specific object.
-	m_RenderSystem.GetGraphicDevice().CreateVertexBuffer(&m_TexturedCube);
+	m_RenderSystem.GetGraphicDevice().CreateVertexBuffer(&m_TextureNormalCube);
+//	m_RenderSystem.GetGraphicDevice().CreateVertexBuffer(&m_Mesh);
 	
 	// 4. Create index buffer for specific object.
-	m_RenderSystem.GetGraphicDevice().CreateIndexBuffer(&m_TexturedCube);
+	m_RenderSystem.GetGraphicDevice().CreateIndexBuffer(&m_TextureNormalCube);
+//	m_RenderSystem.GetGraphicDevice().CreateIndexBuffer(&m_Mesh);
 
 //	m_TexturedCube.SetTexture(m_RenderSystem.GetGraphicDevice().GetDirect3DDevice(), L"..\\..\\Resources\\Images\\Test_Image_32x32.png");
-	m_TexturedCube.SetTexture(m_RenderSystem.GetGraphicDevice().GetDirect3DDevice(), L"C:\\Users\\Admin\\Desktop\\Test_Image_100x100.png");
+	m_TextureNormalCube.SetTexture(m_RenderSystem.GetGraphicDevice().GetDirect3DDevice(), L"C:/Users/Admin/Desktop/Test_Image_100x100.png");
 
 	return true;
 }
@@ -71,7 +78,7 @@ int32 Application::Run()
 		{
 			m_Updater.Update(0.01f);
 
-			m_RenderSystem.Render(0.01f);
+			m_RenderSystem.Render(&m_TextureNormalCube, 0.01f);
 		}
 
 		// ~ 60 FPS

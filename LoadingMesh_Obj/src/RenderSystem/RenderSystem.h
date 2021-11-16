@@ -18,7 +18,7 @@ namespace dx9
 
 		void Initialize(HWND hWnd, int32 width, int32 height, bool windowed);
 
-		void Render(const float& dt);
+		void Render(TNCube* cube, const float& dt);
 
 	// Accessors:
 

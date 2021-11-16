@@ -116,8 +116,6 @@ namespace dx9
 		// Projection matrix.
 		D3DXMatrixPerspectiveFovLH(&m_ProjectionMatrix, m_FovY, m_AspectRatio, 1.0f, 1000.0f);
 		m_DevicePtr->SetTransform(D3DTS_PROJECTION, &m_ProjectionMatrix);
-		m_DevicePtr->SetRenderState(D3DRS_LIGHTING, false);
-		m_DevicePtr->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	}
 	
 	void Camera::SetRotation_X(float angle_X)

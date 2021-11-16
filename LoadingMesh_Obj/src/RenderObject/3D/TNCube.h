@@ -1,19 +1,19 @@
-#ifndef TCUBE_H
-#define TCUBE_H
+#ifndef TNCUBE_H
+#define TNCUBE_H
 
 #include "../Transformable.h"
 
 namespace dx9
 {
-	class TCube : public Transformable
+	class TNCube : public Transformable
 	{
 	public:
 
-	// Constructors and Destructors:
+	// Constructors and Destructor:
 
-		TCube();
+		TNCube();
 
-		~TCube();
+		~TNCube();
 
 	// Functions:
 
@@ -21,33 +21,24 @@ namespace dx9
 
 	// Accessors:
 
-		const std::string& GetTexturePath() const;
-
 		IDirect3DTexture9* GetTexture();
 
+		D3DMATERIAL9* GetMaterial();
+
 	// Modifiers:
-		
-		void SetPosition(D3DXVECTOR3 position);
-		void SetPosition(float x, float y, float z);
 
-		void SetRotation(D3DXVECTOR3 rotation);
-		void SetRotation(float x, float y, float z);
-
-		void SetScale(D3DXVECTOR3 scale);
-		void SetScale(float x, float y, float z);
-
-		void CreateTexture(IDirect3DDevice9* device, LPCWSTR filePath);
+		void SetTexture(IDirect3DDevice9* device, LPCWSTR filePath);
 
 	// Temporary Public Variables:
 
 		static const uint32 VerticesNumber = 24;
 
-		TVertex Vertices[VerticesNumber];
+		TNVertex Vertices[VerticesNumber];
 
 		static const uint32 IndicesNumber = 36;
 
 		// Possibly should be 'const'
-		int32 Indices[IndicesNumber] =
+		const int32 Indices[IndicesNumber] =
 		{
 			// Front face.
 			0, 1, 2,
@@ -84,6 +75,9 @@ namespace dx9
 
 		IDirect3DTexture9* m_Texture;
 		std::string m_TexturePath;
+
+		D3DMATERIAL9 m_Material;
 	};
 }
-#endif // TCUBE_H
+
+#endif // TNCUBE_H

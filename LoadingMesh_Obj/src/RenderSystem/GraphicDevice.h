@@ -4,7 +4,10 @@
 #include "../RenderObject/2D/RectangleShape.h"
 #include "../RenderObject/3D/SCube.h"
 #include "../RenderObject/3D/TCube.h"
+#include "../RenderObject/3D/TNCube.h"
 #include "../TEST/Components/Mesh.h"
+
+#include "LightSource.h"
 
 namespace dx9
 {
@@ -23,10 +26,10 @@ namespace dx9
 		bool Initialize(HWND hWnd, int32 width, int32 height, bool windowed);
 
 		// REPLACE TriangleShape by Shape, AND ALSO REWORK Shape AND HERITOR CLASSES
-		bool CreateVertexBuffer(TCube* cube);
+		bool CreateVertexBuffer(TNCube* cube);
 		bool CreateVertexBuffer(gfx::Mesh* mesh);
 
-		bool CreateIndexBuffer(TCube* cube);
+		bool CreateIndexBuffer(TNCube* cube);
 		bool CreateIndexBuffer(gfx::Mesh* mesh);		
 
 		void InvalidateDevice();
@@ -35,7 +38,7 @@ namespace dx9
 
 		void Clear(D3DCOLOR color);
 
-		void Begin();
+		void Begin(TNCube* cube);
 
 		void End();
 
@@ -80,6 +83,10 @@ namespace dx9
 		D3DXMATRIX m_RotationMatrix_Z;
 		D3DXMATRIX m_ScaleMatrix;
 		D3DXMATRIX m_TranslationMatrix;
+
+	// Light:
+
+		LightSource m_LightSource;
 				
 	// Buffers:
 
@@ -91,5 +98,8 @@ namespace dx9
 		uint32 m_VerticesCount;
 		uint32 m_IndicesCount;
 		uint32 m_PrimitivesCount;
+
+		// TEST
+		IDirect3DTexture9* m_TexturePtr;
 	};
 }

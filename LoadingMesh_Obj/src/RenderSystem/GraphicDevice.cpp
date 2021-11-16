@@ -97,17 +97,17 @@ namespace dx9
 		return true;
 	}
 	
-	bool GraphicDevice::CreateVertexBuffer(TCube* cube)
+	bool GraphicDevice::CreateVertexBuffer(TNCube* cube)
 	{
 		m_VerticesCount   = cube->VerticesNumber;
 
 		void* pVertices;
 
-		m_Device->CreateVertexBuffer(cube->VerticesNumber * sizeof(TVertex), 0, TVertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
+		m_Device->CreateVertexBuffer(cube->VerticesNumber * sizeof(TNVertex), 0, TNVertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
 
 		m_VertexBuffer->Lock(0, sizeof(cube->Vertices), (void**)&pVertices, 0);
 
-		std::memcpy(pVertices, &cube->Vertices, sizeof(cube->Vertices));
+		memcpy_s(pVertices, sizeof(cube->Vertices), cube->Vertices, sizeof(cube->Vertices));
 
 		m_VertexBuffer->Unlock();
 
@@ -116,27 +116,31 @@ namespace dx9
 
 	bool GraphicDevice::CreateVertexBuffer(gfx::Mesh* mesh)
 	{
-		// TEST
-
 		m_VerticesCount = mesh->Vertices.size();
 
 		void* pVertices;
 
 		m_Device->CreateVertexBuffer(m_VerticesCount * sizeof(gfx::Vertex), 0, gfx::Vertex::FVF, D3DPOOL_MANAGED, &m_VertexBuffer, nullptr);
 
-		gfx::Vertex* vertex_array = new gfx::Vertex[mesh->Vertices.size()];
+		const uint32 array_size = mesh->Vertices.size();
 
-		for (uint32 i = 0u; i < static_cast<uint32>(mesh->Vertices.size()); i++)
+		gfx::Vertex* vertex_array = new gfx::Vertex[array_size];
+
+		for (uint32 i = 0u; i < array_size; i++)
 		{
-			vertex_array[i] = mesh->Vertices[i]; // ???
+			vertex_array[i] = mesh->Vertices[i];
 		}
 
-		// Creating a vertex array from vertex vector...
+		m_VertexBuffer->Lock(0, sizeof(vertex_array), (void**)&pVertices, 0);
+
+		std::memcpy(pVertices, &vertex_array, sizeof(vertex_array));
+
+		m_VertexBuffer->Unlock();
 
 		return true;
 	}
 
-	bool GraphicDevice::CreateIndexBuffer(TCube* cube)
+	bool GraphicDevice::CreateIndexBuffer(TNCube* cube)
 	{
 		m_IndicesCount    = cube->IndicesNumber;
 		m_PrimitivesCount = m_IndicesCount / 3;
@@ -147,15 +151,37 @@ namespace dx9
 
 		m_IndexBuffer->Lock(0, sizeof(cube->Indices), (void**)&pIndices, 0);
 
-		std::memcpy(pIndices, &cube->Indices, sizeof(cube->Indices));
+		memcpy_s(pIndices, sizeof(cube->Indices), cube->Indices, sizeof(cube->Indices));
 
 		m_IndexBuffer->Unlock();
-
+		
 		return true;
 	}
 
 	bool GraphicDevice::CreateIndexBuffer(gfx::Mesh* mesh)
 	{
+		m_IndicesCount    = mesh->Indices.size();
+		m_PrimitivesCount = m_IndicesCount / 3;
+
+		void* pIndices;
+
+		m_Device->CreateIndexBuffer(m_IndicesCount * sizeof(uint32), D3DUSAGE_WRITEONLY, D3DFMT_INDEX32, D3DPOOL_MANAGED, &m_IndexBuffer, nullptr);
+
+		const uint32 array_size = mesh->Indices.size();
+
+		uint32* index_array = new uint32[array_size];
+
+		for (uint32 i = 0u; i < array_size; i++)
+		{
+			index_array[i] = mesh->Indices[i];
+		}
+
+		m_IndexBuffer->Lock(0, sizeof(index_array), (void**)&pIndices, 0);
+
+		std::memcpy(pIndices, &index_array, sizeof(index_array));
+
+		m_IndexBuffer->Unlock();
+
 		return true;
 	}
 
@@ -175,15 +201,28 @@ namespace dx9
 		m_Device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, color, 1.0f, 0);
 	}
 
-	void GraphicDevice::Begin()
+	void GraphicDevice::Begin(TNCube* cube)
 	{
 		// Begin scene.
 		m_Device->BeginScene();
-		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(TVertex));
-		m_Device->SetIndices(m_IndexBuffer);
-		m_Device->SetFVF(TVertex::FVF);
 
-		// TEST rectangle.
+		// Render state.
+		m_Device->SetRenderState(D3DRS_LIGHTING, true);
+		m_Device->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
+		m_Device->SetRenderState(D3DRS_NORMALIZENORMALS, true);
+
+		// Set light.
+		m_Device->SetLight(0, m_LightSource.GetD3DLight());
+		m_Device->LightEnable(0, true);
+
+		// Other stuff.
+		m_Device->SetTexture(0, cube->GetTexture());
+		m_Device->SetMaterial(cube->GetMaterial());		
+		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(TNVertex));
+		m_Device->SetIndices(m_IndexBuffer);
+		m_Device->SetFVF(TNVertex::FVF);
+		
+		// Draw indexed primitive.
 		m_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_IndicesCount, 0, m_PrimitivesCount);
 	}
 

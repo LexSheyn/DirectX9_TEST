@@ -73,6 +73,11 @@ namespace dx9
 		return m_TexturePath;
 	}
 
+	IDirect3DTexture9* TCube::GetTexture()
+	{
+		return m_Texture;
+	}
+
 
 // Modifiers:
 
@@ -106,14 +111,11 @@ namespace dx9
 		m_Rotation = D3DXVECTOR3(x, y, z);
 	}
 
-	void TCube::SetTexture(IDirect3DDevice9* device, LPCWSTR filePath)
+	void TCube::CreateTexture(IDirect3DDevice9* device, LPCWSTR filePath)
 	{
-	//	m_TexturePath = filePath;
+	//	m_TexturePath = static_cast<std::string>(filePath);
 
-		if (D3DXCreateTextureFromFile(device, filePath, &m_Texture) == D3D_OK)
-		{
-			MessageBox(nullptr, L"D3D_OK", NULL, NULL);
-		}
+		D3DXCreateTextureFromFileW(device, filePath, &m_Texture);
 	}
 
 }

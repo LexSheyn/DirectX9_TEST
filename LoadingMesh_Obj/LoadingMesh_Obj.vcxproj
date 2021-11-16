@@ -179,6 +179,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\RenderObject\3D\TNCube.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\RenderObject\Vertex\TNVertex.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystem\LightSource.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="src\TEST\Components\MeshTest.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
@@ -260,11 +278,11 @@
     </ClCompile>
     <ClCompile Include="src\RenderSystem\Camera.cpp" />
     <ClCompile Include="src\Application\Application.cpp" />
-    <ClCompile Include="src\RenderObject\Vertex\Color.cpp">
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+    <ClCompile Include="src\RenderObject\Color.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\RenderObject\Vertex\SVertex.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
@@ -321,7 +339,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\RenderObject\3D\TNCube.h" />
     <ClInclude Include="src\RenderObject\Vertex\SVertex.h" />
+    <ClInclude Include="src\RenderObject\Vertex\TNVertex.h" />
+    <ClInclude Include="src\RenderSystem\LightSource.h" />
     <ClInclude Include="src\TEST\Components\MeshTest.h" />
     <ClInclude Include="src\TEST\Loader\Loader.h" />
     <ClInclude Include="src\TEST\Loader\Parser.h" />
@@ -336,7 +357,7 @@
     <ClInclude Include="src\RenderObject\Vertex\TVertex.h" />
     <ClInclude Include="src\RenderSystem\Camera.h" />
     <ClInclude Include="src\Application\Application.h" />
-    <ClInclude Include="src\RenderObject\Vertex\Color.h" />
+    <ClInclude Include="src\RenderObject\Color.h" />
     <ClInclude Include="src\RenderSystem\GraphicDevice.h" />
     <ClInclude Include="src\RenderSystem\RenderSystem.h" />
     <ClInclude Include="src\PrecompiledHeaders\stdafx.h" />

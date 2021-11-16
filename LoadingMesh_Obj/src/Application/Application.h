@@ -5,6 +5,8 @@
 #include "../Updater/Updater.h"
 #include "../RenderSystem/RenderSystem.h"
 
+#include "../TEST/Loader/Loader.h"
+
 class Application
 {
 public:
@@ -45,9 +47,13 @@ protected:
 			    
 	dx9::RenderSystem m_RenderSystem;
 
+	test::Loader m_Loader;
+
 // TEST
 //	dx9::TriangleShape m_Triangle;
 //	dx9::RectangleShape m_Rectangle;
 //	dx9::SCube m_ShadedCube;
-	dx9::TCube m_TexturedCube;
+//	dx9::TCube m_TexturedCube;
+	dx9::TNCube m_TextureNormalCube;
+//	gfx::Mesh m_Mesh;
 };
