@@ -279,7 +279,7 @@ namespace test
 		return true;
 	}
 
-
+	
 // Accessors:
 
 	std::vector<gfx::Mesh>& Loader::GetLoadedMeshes()
@@ -306,10 +306,10 @@ namespace test
 // Private Functions:
 
 	void Loader::GenerateVerticesFromRawObj(std::vector<gfx::Vertex>& oVertices, 
-		                                  const std::vector<gfx::Vector3f>& iPositions, 
-		                                  const std::vector<gfx::Vector2f>& iTextureCoords, 
-		                                  const std::vector<gfx::Vector3f>& iNormals, 
-		                                  const std::string& iLine)
+		                              const std::vector<gfx::Vector3f>& iPositions, 
+		                              const std::vector<gfx::Vector2f>& iTextureCoords, 
+		                              const std::vector<gfx::Vector3f>& iNormals, 
+		                              const std::string& iLine)
 	{
 		std::vector<std::string> face_str;
 		std::vector<std::string> vertex_str;
@@ -435,7 +435,7 @@ namespace test
 	}
 
 	void Loader::VertexTriangulation(std::vector<uint32>& oIndices, 
-		                           const std::vector<gfx::Vertex>& iVertices)
+		                       const std::vector<gfx::Vertex>& iVertices)
 	{
 		// If there are 2 or less verts no triangle can be created so exit.
 

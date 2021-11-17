@@ -1,6 +1,8 @@
 #pragma once
 
 // Custom types
+typedef          bool      bool8;
+
 typedef          char      char8;
 
 typedef signed   char      int8;
@@ -20,9 +22,6 @@ typedef double             float64;
 #define Pi_float32 3.141592f
 #define Pi_float64 3.14159265358979323846
 
-// Windows 10 x32
-#include <windows.h>
-
 // C++ core
 #include <iostream>
 #include <fstream>
@@ -33,6 +32,9 @@ typedef double             float64;
 #include <ctime>
 #include <math.h>
 
+// Windows 10 x32
+#include <windows.h>
+
 // DirectX 9
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -40,6 +42,11 @@ typedef double             float64;
 #pragma comment(lib, "d3d9.lib" )
 #pragma comment(lib, "d3dx9.lib")
 #pragma comment(lib, "dxerr.lib")
+
+// Assimp
+//#include <assimp/Importer.hpp>
+//#include <assimp/scene.h>
+//#include <assimp/postprocess.h>
 
 // Custom
 #include "../Templates/Templates.h"
