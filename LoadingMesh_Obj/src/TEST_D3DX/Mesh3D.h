@@ -17,13 +17,15 @@ namespace test3d
 
 	// Functions:
 
-		//
+		bool Create(DWORD numFaces, DWORD numVertices, IDirect3DDevice9* pD3DDevice, ID3DXMesh** ppMesh);
 
 	private:
 
 	// Variables:
 
-		ID3DXMesh* pMesh;
+		ID3DXMesh* m_pMesh;
+
+		std::string m_Name;
 
 		std::vector<gfx::Vertex> m_Vertices;
 
