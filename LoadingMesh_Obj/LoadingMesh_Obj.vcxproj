@@ -308,7 +308,11 @@
     <ClCompile Include="src\Application\Window.cpp" />
     <ClCompile Include="src\Application\WindowEventListener.cpp" />
     <ClCompile Include="src\Templates\Templates.cpp" />
+    <ClCompile Include="src\TEST_D3DX\CacheEntry.cpp" />
+    <ClCompile Include="src\TEST_D3DX\Material3D.cpp" />
     <ClCompile Include="src\TEST_D3DX\Mesh3D.cpp" />
+    <ClCompile Include="src\TEST_D3DX\MeshLoader.cpp" />
+    <ClCompile Include="src\TEST_D3DX\Vertex3D.cpp" />
     <ClCompile Include="src\Updater\Updater.cpp" />
     <ClCompile Include="src\RenderObject\Transformable.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../PrecompiledHeaders/stdafx.h</PrecompiledHeaderFile>
@@ -367,7 +371,11 @@
     <ClInclude Include="src\Application\Window.h" />
     <ClInclude Include="src\Application\WindowEventListener.h" />
     <ClInclude Include="src\Templates\Templates.h" />
+    <ClInclude Include="src\TEST_D3DX\CacheEntry.h" />
+    <ClInclude Include="src\TEST_D3DX\Material3D.h" />
     <ClInclude Include="src\TEST_D3DX\Mesh3D.h" />
+    <ClInclude Include="src\TEST_D3DX\MeshLoader.h" />
+    <ClInclude Include="src\TEST_D3DX\Vertex3D.h" />
     <ClInclude Include="src\Updater\Updater.h" />
     <ClInclude Include="src\RenderObject\Transformable.h" />
     <ClInclude Include="src\RenderObject\3D\TCube.h" />

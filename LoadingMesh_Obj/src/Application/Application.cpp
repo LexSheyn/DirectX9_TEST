@@ -38,7 +38,7 @@ Application::~Application()
 bool Application::Initialize(HINSTANCE hInstance, int32 nCmdShow)
 {
 	//0. Load Mesh.
-//	m_Loader.LoadObj("C:/Users/Admin/Desktop/ttt2/tttt.obj");
+//	m_Loader.LoadObj("C:/Users/Admin/Desktop/cup.obj");
 
 //	m_Mesh = m_Loader.GetLoadedMeshes()[1];
 
@@ -46,7 +46,12 @@ bool Application::Initialize(HINSTANCE hInstance, int32 nCmdShow)
 	m_Window.GenerateWindow(hInstance, nCmdShow, "Win32Window", "D3DX9 Win32 Window", m_Width, m_Height, m_hWnd);
 
 	// 2. Initialize Renderer.
-	m_RenderSystem.Initialize(m_hWnd, m_Width, m_Height, true);	
+	m_RenderSystem.Initialize(m_hWnd, m_Width, m_Height, true);
+
+//	m_MeshLoader.SetMediaDirectory("C:/Users/Admin/Desktop/");
+//	m_MeshLoader.CreateMesh(m_RenderSystem.GetGraphicDevice().GetDirect3DDevice(), "cup.obj");
+
+//	m_pMesh = m_MeshLoader.GetMesh();
 
 	// 3. Create vertex buffer for specific object.
 	m_RenderSystem.GetGraphicDevice().CreateVertexBuffer(&m_TextureNormalCube);
@@ -79,6 +84,7 @@ int32 Application::Run()
 			m_Updater.Update(0.01f);
 
 			m_RenderSystem.Render(&m_TextureNormalCube, 0.01f);
+		//	m_RenderSystem.Render(m_pMesh, 0.01f);
 		}
 
 		// ~ 60 FPS

@@ -8,6 +8,7 @@
 #include "../TEST/Components/Mesh.h"
 
 #include "LightSource.h"
+#include "../TEST_D3DX/MeshLoader.h"
 
 namespace dx9
 {
@@ -39,6 +40,7 @@ namespace dx9
 		void Clear(D3DCOLOR color);
 
 		void Begin(TNCube* cube);
+		void Begin(ID3DXMesh* pMesh);
 
 		void End();
 

@@ -1,7 +1,8 @@
 #ifndef MESH3D_H
 #define MESH3D_H
 
-#include "../TEST/Components/Vertex.h"
+#include "Vertex3D.h"
+#include "Material3D.h"
 
 namespace test3d
 {
@@ -17,7 +18,19 @@ namespace test3d
 
 	// Functions:
 
-		bool Create(DWORD numFaces, DWORD numVertices, IDirect3DDevice9* pD3DDevice, ID3DXMesh** ppMesh);
+		void Create(const std::vector<Vertex3D>& vertices,
+		            const std::vector<uint32>& indices,
+			                   IDirect3DDevice9* pd3dDevice);
+
+		void Render(DWORD attribute);
+
+	// Accessors:
+
+		//
+
+	// Modifiers:
+
+		
 
 	private:
 
@@ -25,15 +38,19 @@ namespace test3d
 
 		ID3DXMesh* m_pMesh;
 
-		std::string m_Name;
+		std::string Name;
 
-		std::vector<gfx::Vertex> m_Vertices;
+		std::vector<Vertex3D>           m_Vertices;
+							            
+		std::vector<uint32>             m_Indices;
 
-		std::vector<uint32> m_Indices;
+		std::vector<uint32>             m_Attributes;
+								        
+		std::vector<Material3D>         m_Materials;
 
-		std::vector<D3DMATERIAL9> m_Materials;
+		std::vector<IDirect3DTexture9*> m_pTextures;
 
-		std::vector<IDirect3DTexture9> m_Textures;
+		// Effect???
 	};
 }
 

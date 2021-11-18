@@ -114,6 +114,18 @@
     <ClCompile Include="src\RenderSystem\LightSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\TEST_D3DX\Vertex3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TEST_D3DX\Material3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TEST_D3DX\MeshLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TEST_D3DX\CacheEntry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\TEST_D3DX\Mesh3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -210,6 +222,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RenderSystem\LightSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TEST_D3DX\Vertex3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TEST_D3DX\Material3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TEST_D3DX\MeshLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TEST_D3DX\CacheEntry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\TEST_D3DX\Mesh3D.h">

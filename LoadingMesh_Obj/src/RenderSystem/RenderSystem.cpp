@@ -54,6 +54,19 @@ namespace dx9
 		m_GraphicDevice.Present();
 	}
 
+	void RenderSystem::Render(ID3DXMesh* pMesh, const float& dt)
+	{
+		m_GraphicDevice.Clear(Color::Black);
+
+	//	m_Camera.Rotate_X(1.0f, dt);
+	//	m_Camera.Rotate_Y(1.0f, dt);
+	//	m_Camera.Rotate_Z(1.0f, dt);
+
+		m_GraphicDevice.Begin(pMesh);
+		m_GraphicDevice.End();
+		m_GraphicDevice.Present();
+	}
+
 
 // Accessors:
 

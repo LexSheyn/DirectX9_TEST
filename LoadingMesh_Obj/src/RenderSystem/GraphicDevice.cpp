@@ -226,6 +226,31 @@ namespace dx9
 		m_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_IndicesCount, 0, m_PrimitivesCount);
 	}
 
+	void GraphicDevice::Begin(ID3DXMesh* pMesh)
+	{
+		// Begin scene.
+		m_Device->BeginScene();
+
+		// Render state.
+		m_Device->SetRenderState(D3DRS_LIGHTING, false);
+		m_Device->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
+		m_Device->SetRenderState(D3DRS_NORMALIZENORMALS, true);
+
+		// Set light.
+	//	m_Device->SetLight(0, m_LightSource.GetD3DLight());
+	//	m_Device->LightEnable(0, true);
+
+		pMesh->GetVertexBuffer(&m_VertexBuffer);
+
+		m_Device->SetStreamSource(0, m_VertexBuffer, 0, sizeof(test3d::Vertex3D));
+
+		pMesh->GetIndexBuffer(&m_IndexBuffer);
+
+		m_Device->SetIndices(m_IndexBuffer);
+
+		pMesh->DrawSubset(0);
+	}
+
 	void GraphicDevice::End()
 	{
 		// End scene.

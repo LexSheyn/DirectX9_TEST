@@ -49,11 +49,13 @@ protected:
 
 	test::Loader m_Loader;
 
+//	test3d::MeshLoader m_MeshLoader;
+
 // TEST
 //	dx9::TriangleShape m_Triangle;
 //	dx9::RectangleShape m_Rectangle;
 //	dx9::SCube m_ShadedCube;
 //	dx9::TCube m_TexturedCube;
 	dx9::TNCube m_TextureNormalCube;
-//	gfx::Mesh m_Mesh;
+	ID3DXMesh* m_pMesh;
 };
