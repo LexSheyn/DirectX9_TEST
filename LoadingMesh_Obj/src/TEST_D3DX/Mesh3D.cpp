@@ -80,7 +80,14 @@ D3DVERTEXELEMENT9 VERTEX_DECL[] =
     // card's vertex cache. When rendering the mesh's triangle list the vertices will 
     // cache hit more often so it won't have to re-execute the vertex shader.
 
-		// MeshLoader.cpp - 158
+		DWORD* adjacency = new DWORD[m_pMesh->GetNumFaces() * 3u];
+
+		m_pMesh->GenerateAdjacency( 1e-6f, adjacency );
+
+		m_pMesh->OptimizeInplace( D3DXMESHOPT_ATTRSORT | D3DXMESHOPT_VERTEXCACHE, adjacency, nullptr, nullptr, nullptr );
+
+		delete[] adjacency;
+		adjacency = nullptr;
 	}
 
 	void Mesh3D::Render(DWORD attribute)

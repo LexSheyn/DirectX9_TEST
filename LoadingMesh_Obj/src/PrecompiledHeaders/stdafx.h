@@ -1,5 +1,7 @@
 #pragma once
 
+#define NOMINMAX
+
 // Custom types
 typedef          bool      bool8;
 
@@ -44,9 +46,21 @@ typedef double             float64;
 #pragma comment(lib, "dxerr.lib")
 
 // Assimp
-//#include <assimp/Importer.hpp>
-//#include <assimp/scene.h>
-//#include <assimp/postprocess.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
+#pragma comment(lib, "assimp-vc142-mt.lib" )
+#pragma comment(lib, "bz2.lib")
+#pragma comment(lib, "Irrlicht.lib")
+#pragma comment(lib, "jpeg.lib")
+#pragma comment(lib, "kubazip.lib")
+#pragma comment(lib, "libpng16.lib")
+#pragma comment(lib, "minizip.lib")
+#pragma comment(lib, "poly2tri.lib")
+#pragma comment(lib, "polyclipping.lib")
+#pragma comment(lib, "turbojpeg.lib")
+#pragma comment(lib, "zlib.lib")
 
 // Custom
 #include "../Templates/Templates.h"
